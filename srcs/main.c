@@ -6,31 +6,28 @@
 /*   By: micheng <micheng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 14:50:25 by micheng           #+#    #+#             */
-/*   Updated: 2023/07/24 22:25:31 by micheng          ###   ########.fr       */
+/*   Updated: 2023/07/27 18:42:53 by micheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	free_map(char **map)
+void	free_map(char **map, t_vars *vars)
 {
 	int	i;
 
-	i = 0;
+	i = -1;
 	if (!map)
 		return ;
-	while (map[i])
-	{
+	while (++i < vars->map_h)
 		free(map[i]);
-		i++;
-	}
 	free(map);
 }
 
 int	dest_win(t_vars *vars)
 {
 	mlx_destroy_window(vars->render.mlx, vars->render.win);
-	free_map(vars->map);
+	free_map(vars->map, vars);
 	free(vars->render.mlx);
 	exit(0);
 }

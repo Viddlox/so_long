@@ -6,7 +6,7 @@
 /*   By: micheng <micheng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/08 23:43:05 by micheng           #+#    #+#             */
-/*   Updated: 2023/07/25 15:23:59 by micheng          ###   ########.fr       */
+/*   Updated: 2023/07/27 16:39:42 by micheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,25 @@
 
 int	is_obstacle(char c)
 {
-	if (c == '1' || c == 'E' || c == 'X' || c == 'C')
+	if (c == '1' || c == 'E'|| c == 'C')
 		return (1);
 	return (0);
 }
 
-int get_queue_size(t_queue_data *head)
+int	get_queue_size(t_queue_data *head)
 {
-    int count = 0;
-    t_queue *current = head->head;
+	int		count;
+	t_queue	*current;
 
-    while (current != NULL)
-    {
-        count++;
-        current = current->next;
-    }
-    return count;
+	count = 0;
+	current = head->head;
+
+	while (current != NULL)
+	{
+		count++;
+		current = current->next;
+	}
+	return (count);
 }
 
 void	ft_clear_parent_data(t_parent_data **data)

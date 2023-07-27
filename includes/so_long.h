@@ -6,7 +6,7 @@
 /*   By: micheng <micheng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 14:35:05 by micheng           #+#    #+#             */
-/*   Updated: 2023/07/25 23:11:31 by micheng          ###   ########.fr       */
+/*   Updated: 2023/07/28 00:03:15 by micheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ typedef struct s_parent
 	int				parent_x;
 	int				parent_y;
 	struct s_parent	*next;
+	struct s_parent	*parent;
 }	t_parent;
 
 //Enemy and player positions
@@ -124,7 +125,7 @@ typedef struct s_vars
 int		check_file(int ac, char **av, t_vars *vars);
 int		check_map(t_vars *vars);
 int		check_path(t_vars *vars);
-void	free_map(char **map);
+void	free_map(char **map, t_vars *vars);
 char	**clone_map(t_vars *vars);
 
 //movement functions
@@ -134,8 +135,8 @@ int		move_left(t_vars *vars);
 int		move_right(t_vars *vars);
 
 //event functions
-void	print_lose(char **map);
-void	print_win(char **map);
+void	print_win(char **map, t_vars *vars);
+void	print_lose(char **map, t_vars *vars);
 void	game_loop(t_vars *vars);
 
 //rendering/mlx functions
@@ -152,6 +153,7 @@ int		x_vectors(int x, int i);
 int		y_vectors(int y, int i);
 int		is_obstacle(char c);
 void	find_player(t_vars *vars);
+void	find_enemies(t_pos **head, t_vars *vars, int cur_y, int cur_x);
 
 //enemy movement functions
 void	enemy_path(t_vars *vars);
@@ -168,6 +170,7 @@ void	init_pos_list(t_pos_data **data, t_vars *vars);
 void	ft_clear_parent_data(t_parent_data **data);
 void	ft_clear_pos_data(t_pos_data **data);
 void	ft_clear_queue_data(t_queue_data **data);
+void	free_lists(t_vars *vars);
 
 //gnl utils
 char	*get_next_line(int fd);

@@ -6,7 +6,7 @@
 /*   By: micheng <micheng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 00:32:52 by micheng           #+#    #+#             */
-/*   Updated: 2023/07/26 13:42:45 by micheng          ###   ########.fr       */
+/*   Updated: 2023/07/27 23:37:12 by micheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,6 @@ t_queue	*dequeue(t_queue_data *data, t_vars *vars)
 	dequeued_node = data->head;
 	data->head = data->head->next;
 	add_parent(dequeued_node, vars);
-	print_parent_list(vars->head_parent->head);
 	dequeued_node->next = NULL;
 	return (dequeued_node);
 }
@@ -131,7 +130,7 @@ int	bfs(t_vars *vars, t_queue *new_step)
 		explore_neighbors(vars, current_step, map);
 		free(current_step);
 	}
-	// ft_clear_queue_data(&vars->head_queue);
-	// vars->head_queue = NULL;
+	ft_clear_queue_data(&vars->head_queue);
+	vars->head_queue = NULL;
 	return (0);
 }

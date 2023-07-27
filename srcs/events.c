@@ -6,23 +6,23 @@
 /*   By: micheng <micheng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 23:54:57 by micheng           #+#    #+#             */
-/*   Updated: 2023/07/27 16:31:42 by micheng          ###   ########.fr       */
+/*   Updated: 2023/07/28 00:11:56 by micheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	print_win(char **map)
+void	print_win(char **map, t_vars *vars)
 {
 	ft_putstr_fd("You win!", 1);
-	free_map(map);
+	free_map(map, vars);
 	exit (0);
 }
 
-void	print_lose(char **map)
+void	print_lose(char **map, t_vars *vars)
 {
 	ft_putstr_fd("You lose!", 1);
-	free_map(map);
+	free_map(map, vars);
 	exit (0);
 }
 
@@ -30,20 +30,25 @@ static void	update_game_state(t_vars *vars)
 {
 	if (vars->pos.x == vars->pos.x_en
 		&& vars->pos.y == vars->pos.y_en)
-		print_lose(vars->map);
+		print_lose(vars->map, vars);
+	init_pos_list(&vars->head_pos, vars);
+	init_parent_list(&vars->head_parent, vars);
 	init_enemy(vars);
-	ft_clear_pos_data(&vars->head_pos);
-	ft_clear_queue_data(&vars->head_queue);
-	ft_clear_parent_data(&vars->head_parent);
-	vars->head_parent = NULL;
-	vars->head_pos = NULL;
-	vars->head_queue = NULL;
+	free_lists(vars);
 }
 
 void	render_game(t_vars *vars)
 {
+	static int	count = 0;
+
+	count++;
 	mlx_clear_window(vars->render.mlx, vars->render.win);
-	update_game_state(vars);
+	if (count >= 50)
+	{
+		if (vars->en_count > 0)
+			update_game_state(vars);
+		count = 0;
+	}
 	render_sprites(vars);
 }
 

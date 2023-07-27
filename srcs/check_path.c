@@ -6,7 +6,7 @@
 /*   By: micheng <micheng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/02 01:17:13 by micheng           #+#    #+#             */
-/*   Updated: 2023/07/22 22:45:23 by micheng          ###   ########.fr       */
+/*   Updated: 2023/07/27 18:33:47 by micheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ char	**clone_map(t_vars *vars)
 		if (map_clone[i] == NULL)
 		{
 			while (++i < vars->map_h)
-				free_map(&map_clone[i]);
+				free_map(&map_clone[i], vars);
 			free(map_clone);
 		}
 		i++;
