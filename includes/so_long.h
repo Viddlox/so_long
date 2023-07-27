@@ -6,7 +6,7 @@
 /*   By: micheng <micheng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 14:35:05 by micheng           #+#    #+#             */
-/*   Updated: 2023/07/24 22:58:05 by micheng          ###   ########.fr       */
+/*   Updated: 2023/07/25 23:11:31 by micheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,13 +136,14 @@ int		move_right(t_vars *vars);
 //event functions
 void	print_lose(char **map);
 void	print_win(char **map);
-void	update_game_state(t_vars *vars);
+void	game_loop(t_vars *vars);
 
 //rendering/mlx functions
 int		keypress(int code, t_vars *vars);
 int		dest_win(t_vars *vars);
 void	render(t_vars *vars);
 void	render_sprites(t_vars *vars);
+void	render_game(t_vars *vars);
 
 //enemy init functions
 void	init_enemy(t_vars *vars);
@@ -154,7 +155,8 @@ void	find_player(t_vars *vars);
 
 //enemy movement functions
 void	enemy_path(t_vars *vars);
-int		enemy_movement_loop(t_vars *vars);
+void	enemy_delay(t_vars *vars);
+
 
 //linked list utils
 int		get_queue_size(t_queue_data *head);

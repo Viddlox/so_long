@@ -6,7 +6,7 @@
 /*   By: micheng <micheng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 05:02:10 by micheng           #+#    #+#             */
-/*   Updated: 2023/07/25 15:04:44 by micheng          ###   ########.fr       */
+/*   Updated: 2023/07/25 22:06:47 by micheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void	set_sprites(t_vars *vars, int x, int y)
 {
 	{
 	if (vars->map[y][x] == '1')
-		mlx_put_image_to_window(vars->render.mlx, vars->render.win, vars->sprites.walls, x * 32, y * 32);
+		mlx_put_image_to_window(vars->render.mlx,vars->render.win, vars->sprites.walls, x * 32, y * 32);
 	else if (vars->map[y][x] == '0')
 		mlx_put_image_to_window(vars->render.mlx, vars->render.win, vars->sprites.floors, x * 32, y * 32);
 	else if (vars->map[y][x] == 'P')
@@ -65,19 +65,17 @@ void	render_sprites(t_vars *vars)
 void	render(t_vars *vars)
 {
 	vars->render.mlx = mlx_init();
-	vars->render.win = mlx_new_window(vars->render.mlx, vars->map_l * 32, vars->map_h * 32, "so_long");
+	vars->render.win = mlx_new_window(vars->render.mlx,
+			vars->map_l * 32, vars->map_h * 32, "so_long");
 	init_sprites(vars);
 
-	mlx_hook(vars->render.win, 2, (1L << 0), keypress, vars);
-	mlx_hook(vars->render.win, 17, 0L, dest_win, vars);
-
-	// // update_game_state(vars);
-	// if (vars->en_count > 0)
-	// {
-	// 	init_enemy(vars);
-	// 	mlx_loop_hook(vars->render.mlx, (int (*)(void *))enemy_path, vars);
-	// 	render_sprites(vars);
-	// 	mlx_clear_window(vars->render.mlx, vars->render.win);
-	// }
-	mlx_loop(vars->render.mlx);
+	if (vars->en_count > 0)
+		game_loop(vars);
+	else
+	{
+		mlx_hook(vars->render.win, 2, (1L << 0), keypress, vars);
+		mlx_hook(vars->render.win, 17, 0L, dest_win, vars);
+		mlx_loop_hook(vars->render.mlx, (int (*)(void *))render_game, vars);
+		mlx_loop(vars->render.mlx);
+	}
 }
