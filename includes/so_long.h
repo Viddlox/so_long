@@ -6,7 +6,7 @@
 /*   By: micheng <micheng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 14:35:05 by micheng           #+#    #+#             */
-/*   Updated: 2023/07/28 15:02:19 by micheng          ###   ########.fr       */
+/*   Updated: 2023/07/28 18:54:22 by micheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,6 @@ typedef struct s_vars
 	char			**map;
 	int				map_h;
 	int				map_l;
-	int				is_en_moving;
 	t_pos_data		*head_pos;
 	t_queue_data	*head_queue;
 	t_parent_data	*head_parent;
@@ -152,7 +151,6 @@ int		bfs(t_vars *vars, t_queue *new_step);
 int		x_vectors(int x, int i);
 int		y_vectors(int y, int i);
 int		is_obstacle(char c);
-void	find_player(t_vars *vars);
 void	enemy_path(t_vars *vars);
 void	move_enemy(t_vars *vars, int next_x, int next_y);
 

@@ -6,7 +6,7 @@
 /*   By: micheng <micheng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 23:54:57 by micheng           #+#    #+#             */
-/*   Updated: 2023/07/28 15:06:29 by micheng          ###   ########.fr       */
+/*   Updated: 2023/07/28 18:59:34 by micheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,6 @@
 
 static void	update_game_state(t_vars *vars)
 {
-	if (vars->pos.x == vars->pos.x_en
-		&& vars->pos.y == vars->pos.y_en)
-		print_lose(vars->map, vars);
 	init_pos_list(&vars->head_pos, vars);
 	init_parent_list(&vars->head_parent, vars);
 	init_enemy(vars);
@@ -30,12 +27,8 @@ void	render_game(t_vars *vars)
 	count++;
 	if (count >= 100)
 	{
-		if (vars->en_count > 0 && !vars->is_en_moving)
-		{
-			vars->is_en_moving = 1;
+		if (vars->en_count > 0)
 			update_game_state(vars);
-			vars->is_en_moving = 0;
-		}
 		count = 0;
 	}
 	render_sprites(vars);

@@ -6,7 +6,7 @@
 /*   By: micheng <micheng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 14:50:25 by micheng           #+#    #+#             */
-/*   Updated: 2023/07/28 15:02:48 by micheng          ###   ########.fr       */
+/*   Updated: 2023/07/28 16:43:08 by micheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,25 +36,13 @@ int	dest_win(t_vars *vars)
 int	keypress(int code, t_vars *vars)
 {
 	if (code == 13 || code == 126)
-	{
-		free_lists(vars);
 		move_up(vars);
-	}
 	else if (code == 0 || code == 123)
-	{
-		free_lists(vars);
 		move_left(vars);
-	}
 	else if (code == 1 || code == 125)
-	{
-		free_lists(vars);
 		move_down(vars);
-	}
 	else if (code == 2 || code == 124)
-	{
-		free_lists(vars);
 		move_right(vars);
-	}
 	else if (code == 53)
 		dest_win(vars);
 	ft_printf ("Walked %i steps.\n", vars->game.steps);
@@ -69,7 +57,6 @@ int	main(int ac, char **av)
 	vars.head_queue = NULL;
 	vars.head_pos = NULL;
 	vars.head_parent = NULL;
-	vars.is_en_moving = 0;
 	if (check_file(ac, av, &vars) && ac == 2)
 	{
 		vars.game.steps = 0;
