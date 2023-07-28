@@ -6,25 +6,11 @@
 /*   By: micheng <micheng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 23:54:57 by micheng           #+#    #+#             */
-/*   Updated: 2023/07/28 14:39:54 by micheng          ###   ########.fr       */
+/*   Updated: 2023/07/28 15:06:29 by micheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
-void	print_win(char **map, t_vars *vars)
-{
-	ft_putstr_fd("You win!", 1);
-	free_map(map, vars);
-	exit (0);
-}
-
-void	print_lose(char **map, t_vars *vars)
-{
-	ft_putstr_fd("You lose!", 1);
-	free_map(map, vars);
-	exit (0);
-}
 
 static void	update_game_state(t_vars *vars)
 {
@@ -42,10 +28,14 @@ void	render_game(t_vars *vars)
 	static int	count = 0;
 
 	count++;
-	if (count >= 50)
+	if (count >= 100)
 	{
-		if (vars->en_count > 0)
+		if (vars->en_count > 0 && !vars->is_en_moving)
+		{
+			vars->is_en_moving = 1;
 			update_game_state(vars);
+			vars->is_en_moving = 0;
+		}
 		count = 0;
 	}
 	render_sprites(vars);

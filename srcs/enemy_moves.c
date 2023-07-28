@@ -6,7 +6,7 @@
 /*   By: micheng <micheng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 01:02:52 by micheng           #+#    #+#             */
-/*   Updated: 2023/07/28 14:38:00 by micheng          ###   ########.fr       */
+/*   Updated: 2023/07/28 15:17:52 by micheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,14 +45,10 @@ static int	manhattan_distance(t_vars *vars, t_parent *current, t_parent *next)
 	int	res;
 	int	temp;
 
-	printf("current: (%d, %d)\n", current->parent_y, current->parent_x);
-	printf("next: (%d, %d)\n", next->parent_y, next->parent_x);
 	res = (abs(vars->pos.x - current->parent_x)
 			+ abs(vars->pos.y - current->parent_y));
-	printf("res: %d\n", res);
 	temp = (abs(vars->pos.x - next->parent_x)
 			+ abs(vars->pos.y - next->parent_y));
-	printf("temp: %d\n", temp);
 	if (temp < res)
 		return (1);
 	return (0);
@@ -64,6 +60,8 @@ void	enemy_path(t_vars *vars)
 	t_parent	*next_parent;
 
 	current_parent = vars->head_parent->head;
+	if (current_parent == NULL)
+		return ;
 	next_parent = vars->head_parent->head->next;
 	print_parent_list(vars->head_parent->head);
 	while (current_parent != NULL)
@@ -81,7 +79,7 @@ void	enemy_path(t_vars *vars)
 			if (vars->pos.x == vars->pos.x_en && vars->pos.y == vars->pos.y_en)
 				print_lose(vars->map, vars);
 			mlx_clear_window(vars->render.mlx, vars->render.win);
-			break ;
+			return ;
 		}
 		else
 			next_parent = next_parent->next;

@@ -6,7 +6,7 @@
 /*   By: micheng <micheng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 14:35:05 by micheng           #+#    #+#             */
-/*   Updated: 2023/07/28 14:22:40 by micheng          ###   ########.fr       */
+/*   Updated: 2023/07/28 15:02:19 by micheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,7 @@ typedef struct s_vars
 	char			**map;
 	int				map_h;
 	int				map_l;
+	int				is_en_moving;
 	t_pos_data		*head_pos;
 	t_queue_data	*head_queue;
 	t_parent_data	*head_parent;
