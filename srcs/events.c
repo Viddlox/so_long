@@ -6,7 +6,7 @@
 /*   By: micheng <micheng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 23:54:57 by micheng           #+#    #+#             */
-/*   Updated: 2023/07/28 18:59:34 by micheng          ###   ########.fr       */
+/*   Updated: 2023/07/28 22:35:53 by micheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	render_game(t_vars *vars)
 	static int	count = 0;
 
 	count++;
-	if (count >= 100)
+	if (count >= 75)
 	{
 		if (vars->en_count > 0)
 			update_game_state(vars);
