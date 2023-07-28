@@ -6,7 +6,7 @@
 /*   By: micheng <micheng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 14:35:05 by micheng           #+#    #+#             */
-/*   Updated: 2023/07/28 00:03:15 by micheng          ###   ########.fr       */
+/*   Updated: 2023/07/28 14:22:40 by micheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ typedef struct s_parent
 	int				parent_x;
 	int				parent_y;
 	struct s_parent	*next;
-	struct s_parent	*parent;
 }	t_parent;
 
 //Enemy and player positions
@@ -146,19 +145,15 @@ void	render(t_vars *vars);
 void	render_sprites(t_vars *vars);
 void	render_game(t_vars *vars);
 
-//enemy init functions
+//enemy functions
 void	init_enemy(t_vars *vars);
 int		bfs(t_vars *vars, t_queue *new_step);
 int		x_vectors(int x, int i);
 int		y_vectors(int y, int i);
 int		is_obstacle(char c);
 void	find_player(t_vars *vars);
-void	find_enemies(t_pos **head, t_vars *vars, int cur_y, int cur_x);
-
-//enemy movement functions
 void	enemy_path(t_vars *vars);
-void	enemy_delay(t_vars *vars);
-
+void	move_enemy(t_vars *vars, int next_x, int next_y);
 
 //linked list utils
 int		get_queue_size(t_queue_data *head);

@@ -6,7 +6,7 @@
 /*   By: micheng <micheng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 23:54:57 by micheng           #+#    #+#             */
-/*   Updated: 2023/07/28 00:11:56 by micheng          ###   ########.fr       */
+/*   Updated: 2023/07/28 14:39:54 by micheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ void	render_game(t_vars *vars)
 	static int	count = 0;
 
 	count++;
-	mlx_clear_window(vars->render.mlx, vars->render.win);
 	if (count >= 50)
 	{
 		if (vars->en_count > 0)
