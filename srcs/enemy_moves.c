@@ -6,7 +6,7 @@
 /*   By: micheng <micheng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 01:02:52 by micheng           #+#    #+#             */
-/*   Updated: 2023/07/28 22:33:50 by micheng          ###   ########.fr       */
+/*   Updated: 2023/07/29 18:14:14 by micheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,9 @@ int	y_vectors(int y, int i)
 	return (y);
 }
 
-int	is_adjacent(int x1, int y1, int x2, int y2)
+static	int	obstacle_chekcer(t_vars *vars, t_parent *current, t_parent *next)
 {
-	int	dx;
-	int	dy;
-
-	dx = abs(x1 - x2);
-	dy = abs(y1 - y2);
-	return ((dx == 1 && dy == 0) || (dx == 0 && dy == 1));
+	
 }
 
 static int	manhattan_distance(t_vars *vars, t_parent *current, t_parent *next)
@@ -70,10 +65,7 @@ void	enemy_path(t_vars *vars)
 	print_parent_list(vars->head_parent->head);
 	while (current_parent != NULL)
 	{
-		if (next_parent != NULL && (is_adjacent(current_parent->parent_x,
-					current_parent->parent_y,
-					next_parent->parent_x, next_parent->parent_y)
-				&& manhattan_distance(vars, current_parent, next_parent)))
+		if (next_parent != NULL && manhattan_distance(vars, current_parent, next_parent))
 		{
 			vars->map[current_parent->parent_y][current_parent->parent_x] = '0';
 			vars->map[next_parent->parent_y][next_parent->parent_x] = 'X';
