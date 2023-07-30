@@ -6,7 +6,7 @@
 /*   By: micheng <micheng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 00:32:52 by micheng           #+#    #+#             */
-/*   Updated: 2023/07/29 19:59:58 by micheng          ###   ########.fr       */
+/*   Updated: 2023/07/29 23:07:11 by micheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,14 +103,12 @@ static void	explore_neighbors(t_vars *vars,
 	}
 }
 
-int	bfs(t_vars *vars, t_queue *new_step)
+int	bfs(t_vars *vars, t_queue *new_step, char **map)
 {
-	char	**map;
 	t_queue	*current_step;
 	int		i;
 
 	i = -1;
-	map = clone_map(vars);
 	enqueue(vars->head_queue, new_step);
 	while (get_queue_size(vars->head_queue) > 0)
 	{
@@ -122,9 +120,6 @@ int	bfs(t_vars *vars, t_queue *new_step)
 			ft_clear_queue_data(&vars->head_queue);
 			vars->head_queue = NULL;
 			ft_printf("Target found.\n");
-			while (++i < vars->map_h)
-				free(map[i]);
-			free(map);
 			return (1);
 		}
 		explore_neighbors(vars, current_step, map);

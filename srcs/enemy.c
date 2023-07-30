@@ -6,7 +6,7 @@
 /*   By: micheng <micheng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 05:32:52 by micheng           #+#    #+#             */
-/*   Updated: 2023/07/28 22:33:00 by micheng          ###   ########.fr       */
+/*   Updated: 2023/07/29 22:42:13 by micheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,20 +106,24 @@ void	init_enemy(t_vars *vars)
 {
 	t_pos	*current;
 	t_queue	*en_current_step;
+	char	**map;
 
 	find_enemies(&(vars->head_pos->head), vars, 1, 1);
 	current = vars->head_pos->head;
 	// enemy_valid_path(vars, current);
 	while (current != NULL)
 	{
+		map = clone_map(vars);
 		init_queue_list(&vars->head_queue, vars);
 		en_current_step = malloc(sizeof(t_queue));
 		if (!en_current_step)
 			return ;
 		en_current_step->cur_y = current->y_en;
 		en_current_step->cur_x = current->x_en;
-		bfs(vars, en_current_step);
-		enemy_path(vars);
+		bfs(vars, en_current_step, map);
+		free_map(map, vars);
+		print_parent_list(vars->head_parent->head);
+		// enemy_path(vars);
 		free(en_current_step);
 		ft_clear_queue_data(&vars->head_queue);
 		ft_clear_parent_data(&vars->head_parent);

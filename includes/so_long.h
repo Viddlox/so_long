@@ -6,7 +6,7 @@
 /*   By: micheng <micheng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 14:35:05 by micheng           #+#    #+#             */
-/*   Updated: 2023/07/28 18:54:22 by micheng          ###   ########.fr       */
+/*   Updated: 2023/07/29 22:53:36 by micheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <unistd.h>
 # include <math.h>
 # include <stdlib.h>
+# include <stdbool.h>
 # include <stdio.h> //test
 
 # define BUFFER_SIZE 1024
@@ -147,7 +148,7 @@ void	render_game(t_vars *vars);
 
 //enemy functions
 void	init_enemy(t_vars *vars);
-int		bfs(t_vars *vars, t_queue *new_step);
+int		bfs(t_vars *vars, t_queue *new_step, char **map);
 int		x_vectors(int x, int i);
 int		y_vectors(int y, int i);
 int		is_obstacle(char c);
