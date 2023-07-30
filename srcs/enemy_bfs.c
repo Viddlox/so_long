@@ -6,7 +6,7 @@
 /*   By: micheng <micheng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 00:32:52 by micheng           #+#    #+#             */
-/*   Updated: 2023/07/29 23:07:11 by micheng          ###   ########.fr       */
+/*   Updated: 2023/07/30 16:53:42 by micheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,9 @@ static void	explore_neighbors(t_vars *vars,
 			new_step->cur_y = new_y;
 			enqueue(vars->head_queue, new_step);
 			map[new_y][new_x] = 'V';
+			map[current_step->cur_y][current_step->cur_x] = 'V';
+			current_step->cur_x = new_x;
+			current_step->cur_y = new_y;
 		}
 	}
 }
