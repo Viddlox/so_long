@@ -6,7 +6,7 @@
 /*   By: micheng <micheng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 05:32:52 by micheng           #+#    #+#             */
-/*   Updated: 2023/07/30 16:25:47 by micheng          ###   ########.fr       */
+/*   Updated: 2023/07/31 14:42:53 by micheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,8 @@ void	init_enemy(t_vars *vars)
 		en_current_step->cur_y = current->y_en;
 		en_current_step->cur_x = current->x_en;
 		bfs(vars, en_current_step, map);
-		print_parent_list(vars->head_parent->head);
-		free_map(map, vars);
 		enemy_path(vars);
+		free_map(map, vars);
 		free(en_current_step);
 		ft_clear_queue_data(&vars->head_queue);
 		ft_clear_parent_data(&vars->head_parent);
