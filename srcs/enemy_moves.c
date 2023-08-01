@@ -6,36 +6,34 @@
 /*   By: micheng <micheng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 01:02:52 by micheng           #+#    #+#             */
-/*   Updated: 2023/08/02 06:17:43 by micheng          ###   ########.fr       */
+/*   Updated: 2023/08/02 07:01:46 by micheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	x_vectors(int x, int i)
+// int	is_adjacent(t_vars *vars, t_parent *next)
+// {
+// 	int	dy;
+// 	int	dx;
+
+// 	dx = abs(vars->pos.x_en - next->parent_x);
+// 	dy = abs(vars->pos.y_en - next->parent_y);
+// 	return (dx <= 1 && dy == 0) || (dx == 0 && dy <= 1);
+// }
+
+
+static int	is_cheapest(t_vars *vars, t_parent *next)
 {
-	if (i == 0)
-		return (x - 1);
-	else if (i == 1)
-		return (x + 1);
-	return (x);
+	int	next_cost;
+	int	current_cost;
+
+	next_cost = manhattan_distance(vars, next->parent_x, next->parent_y);
+	current_cost = manhattan_distance(vars, vars->pos.x_en, vars->pos.y_en);
+
+	return (next_cost <= current_cost);
 }
 
-int	y_vectors(int y, int i)
-{
-	if (i == 2)
-		return (y - 1);
-	else if (i == 3)
-		return (y + 1);
-	return (y);
-}
-
-int	is_obstacle(char c)
-{
-	if (c == '1' || c == 'E' || c == 'C')
-		return (1);
-	return (0);
-}
 
 static int	is_visited(t_vars *vars, t_parent *next)
 {
@@ -61,10 +59,10 @@ void	enemy_path(t_vars *vars)
 	current_parent = vars->head_parent->head;
 	next_parent = current_parent->next;
 	print_parent_list(vars->head_parent->head);
-	print_tracker_list(vars->head_tracker->head);
 	while (current_parent != NULL)
 	{
-		if (next_parent != NULL && is_visited(vars, next_parent))
+		if (next_parent != NULL && is_visited(vars, next_parent)
+			&& is_cheapest(vars, next_parent))
 		{
 			vars->map[current_parent->parent_y][current_parent->parent_x] = '0';
 			vars->map[next_parent->parent_y][next_parent->parent_x] = 'X';
@@ -88,3 +86,4 @@ void	enemy_path(t_vars *vars)
 			next_parent = next_parent->next;
 	}
 }
+
