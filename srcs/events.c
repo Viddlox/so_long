@@ -6,7 +6,7 @@
 /*   By: micheng <micheng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 23:54:57 by micheng           #+#    #+#             */
-/*   Updated: 2023/08/02 04:22:43 by micheng          ###   ########.fr       */
+/*   Updated: 2023/08/02 06:19:27 by micheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ static void	update_game_state(t_vars *vars)
 {
 	init_pos_list(&vars->head_pos, vars);
 	init_parent_list(&vars->head_parent, vars);
-	init_path_cost_list(&vars->head_path_cost, vars);
 	init_enemy(vars);
 	free_lists(vars);
 }

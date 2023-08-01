@@ -6,7 +6,7 @@
 /*   By: micheng <micheng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 14:35:05 by micheng           #+#    #+#             */
-/*   Updated: 2023/08/02 04:57:56 by micheng          ###   ########.fr       */
+/*   Updated: 2023/08/02 06:22:11 by micheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,26 +56,6 @@ typedef struct s_tracker
 	int					y;
 	struct s_tracker	*next;
 }	t_tracker;
-
-typedef struct s_path_cost
-{
-	int					x;
-	int					y;
-	int					cost;
-	struct s_path_cost	*next;
-}	t_path_cost;
-
-typedef struct s_priority_queue
-{
-	int			capacity;
-	int			size;
-	t_path_cost	*arr;
-}	t_priority_queue;
-
-typedef struct s_path_cost_data
-{
-	t_path_cost	*head;
-}	t_path_cost_data;
 
 typedef struct s_tracker_data
 {
@@ -149,7 +129,6 @@ typedef struct s_vars
 	t_queue_data		*head_queue;
 	t_parent_data		*head_parent;
 	t_tracker_data		*head_tracker;
-	t_path_cost_data	*head_path_cost;
 	t_pos				pos;
 	t_game				game;
 	t_ren				render;
@@ -190,8 +169,7 @@ int		x_vectors(int x, int i);
 int		y_vectors(int y, int i);
 int		is_obstacle(char c);
 void	enemy_path(t_vars *vars);
-void	path_cost(t_vars *vars);
-int		manhattan_distance(t_vars *vars, int x1, int x2, int y1, int y2);
+int		manhattan_distance(t_vars *vars, int x, int y);
 
 //linked list utils
 int		get_queue_size(t_queue_data *head);
@@ -200,12 +178,9 @@ void	init_parent_list(t_parent_data **data, t_vars *vars);
 void	init_queue_list(t_queue_data **data, t_vars *vars);
 void	init_pos_list(t_pos_data **data, t_vars *vars);
 void	init_tracker_list(t_tracker_data **data, t_vars *vars);
-void	init_path_cost_list(t_path_cost_data **data, t_vars *vars);
 void	ft_clear_parent_data(t_parent_data **data);
 void	ft_clear_pos_data(t_pos_data **data);
 void	ft_clear_queue_data(t_queue_data **data);
-void	ft_clear_tracker_data(t_tracker_data **data);
-void	ft_clear_path_cost_data(t_path_cost_data **data);
 void	free_lists(t_vars *vars);
 void	add_path(t_queue *data, t_vars *vars, int cost);
 

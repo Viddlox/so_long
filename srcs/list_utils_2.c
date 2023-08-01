@@ -6,7 +6,7 @@
 /*   By: micheng <micheng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/08 23:43:05 by micheng           #+#    #+#             */
-/*   Updated: 2023/08/02 04:30:54 by micheng          ###   ########.fr       */
+/*   Updated: 2023/08/02 06:20:33 by micheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void	ft_clear_pos_data(t_pos_data **data)
 	*data = NULL;
 }
 
-void	ft_clear_tracker_data(t_tracker_data **data)
+void	ft_clear_tracked_data(t_tracker_data **data)
 {
 	t_tracker	*current;
 	t_tracker	*temp;

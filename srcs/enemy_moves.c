@@ -6,7 +6,7 @@
 /*   By: micheng <micheng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 01:02:52 by micheng           #+#    #+#             */
-/*   Updated: 2023/08/02 02:26:59 by micheng          ###   ########.fr       */
+/*   Updated: 2023/08/02 06:17:43 by micheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,4 +88,3 @@ void	enemy_path(t_vars *vars)
 			next_parent = next_parent->next;
 	}
 }
-
