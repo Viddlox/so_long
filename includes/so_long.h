@@ -6,7 +6,7 @@
 /*   By: micheng <micheng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 14:35:05 by micheng           #+#    #+#             */
-/*   Updated: 2023/07/31 14:44:26 by micheng          ###   ########.fr       */
+/*   Updated: 2023/08/02 04:21:26 by micheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 # include <unistd.h>
 # include <math.h>
 # include <stdlib.h>
-# include <stdbool.h>
 # include <stdio.h> //test
 
 # define BUFFER_SIZE 1024
@@ -49,6 +48,32 @@ typedef struct s_pos
 	int				dy;
 	struct s_pos	*next;
 }	t_pos;
+
+
+typedef struct s_tracker
+{
+	int					x;
+	int					y;
+	struct s_tracker	*next;
+}	t_tracker;
+
+typedef struct s_path_cost
+{
+	int					x;
+	int					y;
+	int					cost;
+	struct s_path_cost	*next;
+}	t_path_cost;
+
+typedef struct s_path_cost_data
+{
+	t_path_cost	*head;
+}	t_path_cost_data;
+
+typedef struct s_tracker_data
+{
+	t_tracker	*head;
+}	t_tracker_data;
 
 typedef struct s_parent_data
 {
@@ -104,21 +129,24 @@ typedef struct s_sprites
 //main variables for the game
 typedef struct s_vars
 {
-	int				p_count;
-	int				e_count;
-	int				c_count;
-	int				en_count;
-	int				ext_count;
-	char			**map;
-	int				map_h;
-	int				map_l;
-	t_pos_data		*head_pos;
-	t_queue_data	*head_queue;
-	t_parent_data	*head_parent;
-	t_pos			pos;
-	t_game			game;
-	t_ren			render;
-	t_sprites		sprites;
+	int					p_count;
+	int					e_count;
+	int					c_count;
+	int					en_count;
+	int					ext_count;
+	char				**map;
+	int					map_h;
+	int					map_l;
+	int					track_flag;
+	t_pos_data			*head_pos;
+	t_queue_data		*head_queue;
+	t_parent_data		*head_parent;
+	t_tracker_data		*head_tracker;
+	t_path_cost_data	*head_path_cost;
+	t_pos				pos;
+	t_game				game;
+	t_ren				render;
+	t_sprites			sprites;
 }		t_vars;
 
 //map validation functions
@@ -137,6 +165,8 @@ int		move_right(t_vars *vars);
 //event functions
 void	print_win(char **map, t_vars *vars);
 void	print_lose(char **map, t_vars *vars);
+void	print_parent_list(t_parent *head);
+void	print_tracker_list(t_tracker *head_tracker);
 void	game_loop(t_vars *vars);
 
 //rendering/mlx functions
@@ -146,25 +176,30 @@ void	render(t_vars *vars);
 void	render_sprites(t_vars *vars);
 void	render_game(t_vars *vars);
 
-//enemy functions
+//enemy pathfinding functions
 void	init_enemy(t_vars *vars);
-int		bfs(t_vars *vars, t_queue *new_step, char **map);
+int		bfs(t_vars *vars, t_queue *new_step);
 int		x_vectors(int x, int i);
 int		y_vectors(int y, int i);
 int		is_obstacle(char c);
 void	enemy_path(t_vars *vars);
+void	path_cost(t_vars *vars, int x, int y);
 
 //linked list utils
 int		get_queue_size(t_queue_data *head);
 void	ft_del(void *content);
-void	print_parent_list(t_parent *head);
 void	init_parent_list(t_parent_data **data, t_vars *vars);
 void	init_queue_list(t_queue_data **data, t_vars *vars);
 void	init_pos_list(t_pos_data **data, t_vars *vars);
+void	init_tracker_list(t_tracker_data **data, t_vars *vars);
+void	init_path_cost_list(t_path_cost_data **data, t_vars *vars);
 void	ft_clear_parent_data(t_parent_data **data);
 void	ft_clear_pos_data(t_pos_data **data);
 void	ft_clear_queue_data(t_queue_data **data);
+void	ft_clear_tracker_data(t_tracker_data **data);
+void	ft_clear_path_cost_data(t_path_cost_data **data);
 void	free_lists(t_vars *vars);
+
 
 //gnl utils
 char	*get_next_line(int fd);

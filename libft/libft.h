@@ -6,7 +6,7 @@
 /*   By: micheng <micheng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 21:54:53 by mcheng            #+#    #+#             */
-/*   Updated: 2023/07/22 23:48:42 by micheng          ###   ########.fr       */
+/*   Updated: 2023/08/02 02:05:16 by micheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,5 @@ int		ft_hexdec(unsigned int num, const char s);
 int		ft_pointer(void *ptr);
 int		ft_putnbr(int n);
 int		ft_putstr(char *str);
-
 
 #endif

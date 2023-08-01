@@ -1,23 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   enemy_utils.c                                      :+:      :+:    :+:   */
+/*   list_utils_2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: micheng <micheng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/08 23:43:05 by micheng           #+#    #+#             */
-/*   Updated: 2023/07/29 20:00:13 by micheng          ###   ########.fr       */
+/*   Updated: 2023/07/31 22:36:52 by micheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
-int	is_obstacle(char c)
-{
-	if (c == '1' || c == 'E' || c == 'C')
-		return (1);
-	return (0);
-}
 
 int	get_queue_size(t_queue_data *head)
 {
@@ -75,6 +68,24 @@ void	ft_clear_pos_data(t_pos_data **data)
 {
 	t_pos	*current;
 	t_pos	*temp;
+
+	if (!data || !*data)
+		return ;
+	current = (*data)->head;
+	while (current != NULL)
+	{
+		temp = current;
+		current = current->next;
+		free(temp);
+	}
+	free(*data);
+	*data = NULL;
+}
+
+void	ft_clear_tracker_data(t_tracker_data **data)
+{
+	t_tracker	*current;
+	t_tracker	*temp;
 
 	if (!data || !*data)
 		return ;

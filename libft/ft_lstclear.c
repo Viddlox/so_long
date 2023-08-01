@@ -6,7 +6,7 @@
 /*   By: micheng <micheng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 14:19:51 by micheng           #+#    #+#             */
-/*   Updated: 2023/07/23 21:22:55 by micheng          ###   ########.fr       */
+/*   Updated: 2023/08/02 02:02:07 by micheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,10 @@ void	ft_lstclear(t_list **lst, void (*del)(void *))
 	*lst = NULL;
 }
 
-void	ft_del(void *content)
-{
-	free(content);
-}
+// void	ft_del(void *content)
+// {
+// 	free(content);
+// }
 /*
 int	main(void)
 {

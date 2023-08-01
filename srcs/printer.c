@@ -6,7 +6,7 @@
 /*   By: micheng <micheng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 14:52:44 by micheng           #+#    #+#             */
-/*   Updated: 2023/07/31 14:48:19 by micheng          ###   ########.fr       */
+/*   Updated: 2023/08/02 02:26:03 by micheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,16 @@ void	print_parent_list(t_parent *head)
 		printf("Parent: (%d, %d)\n", current->parent_y, current->parent_x);
 		current = current->next;
 	}
+}
+
+void print_tracker_list(t_tracker *head_tracker)
+{
+    t_tracker *current = head_tracker;
+    printf("Tracker List: ");
+    while (current != NULL)
+    {
+        printf("(%d, %d) -> ", current->x, current->y);
+        current = current->next;
+    }
+    printf("NULL\n");
 }

@@ -6,7 +6,7 @@
 /*   By: micheng <micheng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 13:42:57 by micheng           #+#    #+#             */
-/*   Updated: 2023/07/22 23:50:43 by micheng          ###   ########.fr       */
+/*   Updated: 2023/08/02 02:02:53 by micheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ void	ft_lstdelone(t_list *lst, void (*del)(void *))
 	free(lst);
 }
 
-void	ft_del(void *content)
-{
-	free(content);
-}
+// void	ft_del(void *content)
+// {
+// 	free(content);
+// }
 /*
 int	main(void)
 {

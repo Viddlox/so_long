@@ -6,7 +6,7 @@
 /*   By: micheng <micheng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 05:32:52 by micheng           #+#    #+#             */
-/*   Updated: 2023/07/31 14:42:53 by micheng          ###   ########.fr       */
+/*   Updated: 2023/08/02 01:52:41 by micheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,26 +50,46 @@ void	find_enemies(t_pos **head, t_vars *vars, int cur_y, int cur_x)
 	find_enemies(head, vars, cur_y, cur_x);
 }
 
+static	void	add_tracked_node(t_pos *data, t_vars *vars)
+{
+	t_tracker	*current;
+	t_tracker	*temp;
+
+	current = malloc(sizeof(t_tracker));
+	if (!current)
+		return ;
+	current->x = data->x_en;
+	current->y = data->y_en;
+	current->next = NULL;
+	if (vars->head_tracker->head == NULL)
+		vars->head_tracker->head = current;
+	else
+	{
+		temp = vars->head_tracker->head;
+		while (temp->next != NULL)
+			temp = temp->next;
+		temp->next = current;
+	}
+}
+
 void	init_enemy(t_vars *vars)
 {
-	t_pos	*current;
-	t_queue	*en_current_step;
-	char	**map;
+	t_pos		*current;
+	t_queue		*en_current_step;
 
 	find_enemies(&(vars->head_pos->head), vars, 1, 1);
 	current = vars->head_pos->head;
 	while (current != NULL)
 	{
-		map = clone_map(vars);
 		init_queue_list(&vars->head_queue, vars);
+		add_tracked_node(current, vars);
 		en_current_step = malloc(sizeof(t_queue));
 		if (!en_current_step)
 			return ;
 		en_current_step->cur_y = current->y_en;
 		en_current_step->cur_x = current->x_en;
-		bfs(vars, en_current_step, map);
+		bfs(vars, en_current_step);
 		enemy_path(vars);
-		free_map(map, vars);
 		free(en_current_step);
 		ft_clear_queue_data(&vars->head_queue);
 		ft_clear_parent_data(&vars->head_parent);

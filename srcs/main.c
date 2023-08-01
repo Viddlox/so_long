@@ -6,7 +6,7 @@
 /*   By: micheng <micheng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 14:50:25 by micheng           #+#    #+#             */
-/*   Updated: 2023/07/28 16:43:08 by micheng          ###   ########.fr       */
+/*   Updated: 2023/08/01 01:23:27 by micheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,13 +57,22 @@ int	main(int ac, char **av)
 	vars.head_queue = NULL;
 	vars.head_pos = NULL;
 	vars.head_parent = NULL;
+	vars.head_tracker = NULL;
+	vars.track_flag = 0;
 	if (check_file(ac, av, &vars) && ac == 2)
 	{
+		init_tracker_list(&vars.head_tracker, &vars);
 		vars.game.steps = 0;
 		render(&vars);
 		// system("leaks -q so_long");
 	}
 	else
 		ft_printf("Error: Map is invalid or not found.\n");
+	ft_clear_tracker_data(&vars.head_tracker);
+	free_lists(&vars);
+	vars.head_queue = NULL;
+	vars.head_pos = NULL;
+	vars.head_parent = NULL;
+	vars.head_tracker = NULL;
 	return (0);
 }
