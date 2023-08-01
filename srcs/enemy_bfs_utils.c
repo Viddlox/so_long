@@ -6,7 +6,7 @@
 /*   By: micheng <micheng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 02:44:48 by micheng           #+#    #+#             */
-/*   Updated: 2023/08/02 04:24:00 by micheng          ###   ########.fr       */
+/*   Updated: 2023/08/02 04:57:22 by micheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,17 +43,33 @@ void	ft_clear_path_cost_data(t_path_cost_data **data)
 	*data = NULL;
 }
 
-static int	manhattan_distance(t_vars *vars, int x, int y)
+int	manhattan_distance(t_vars *vars, int x1, int x2, int y1, int y2)
 {
-
+	return (abs(x1 - x2) + abs(y1 - y2));
 }
 
-static void	add_path(void)
+void	add_path(t_queue *data, t_vars *vars, int cost)
 {
-	
-}
+	t_path_cost	*current;
+	t_path_cost	*temp;
 
-void	path_cost(t_vars *vars, int x, int y)
-{
-	
+	current = malloc(sizeof(t_parent));
+	if (!current)
+	{
+		fprintf(stderr, "Error: Memory allocation failed for pos.\n");
+		return ;
+	}
+	current->x = data->cur_x;
+	current->y = data->cur_y;
+	current->cost = cost;
+	current->next = NULL;
+	if (vars->head_parent->head == NULL)
+		vars->head_parent->head = current;
+	else
+	{
+		temp = vars->head_parent->head;
+		while (temp->next != NULL)
+			temp = temp->next;
+		temp->next = current;
+	}
 }

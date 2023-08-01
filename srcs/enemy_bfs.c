@@ -6,7 +6,7 @@
 /*   By: micheng <micheng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 00:32:52 by micheng           #+#    #+#             */
-/*   Updated: 2023/08/02 04:22:15 by micheng          ###   ########.fr       */
+/*   Updated: 2023/08/02 04:57:12 by micheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ static void	explore_neighbors(t_vars *vars,
 	int		i;
 	int		new_x;
 	int		new_y;
+	int		cost;
 	t_queue	*new_step;
 
 	i = -1;
@@ -88,7 +89,6 @@ static void	explore_neighbors(t_vars *vars,
 	{
 		new_x = x_vectors(current_step->cur_x, i);
 		new_y = y_vectors(current_step->cur_y, i);
-		path_cost(vars, new_x, new_y);
 		if (new_x >= 0 && new_x < vars->map_l
 			&& new_y >= 0 && new_y < vars->map_h
 			&& map[new_y][new_x] != 'V' && !is_obstacle(map[new_y][new_x]))

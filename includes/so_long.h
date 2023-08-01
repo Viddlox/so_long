@@ -6,7 +6,7 @@
 /*   By: micheng <micheng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 14:35:05 by micheng           #+#    #+#             */
-/*   Updated: 2023/08/02 04:21:26 by micheng          ###   ########.fr       */
+/*   Updated: 2023/08/02 04:57:56 by micheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,13 @@ typedef struct s_path_cost
 	int					cost;
 	struct s_path_cost	*next;
 }	t_path_cost;
+
+typedef struct s_priority_queue
+{
+	int			capacity;
+	int			size;
+	t_path_cost	*arr;
+}	t_priority_queue;
 
 typedef struct s_path_cost_data
 {
@@ -183,7 +190,8 @@ int		x_vectors(int x, int i);
 int		y_vectors(int y, int i);
 int		is_obstacle(char c);
 void	enemy_path(t_vars *vars);
-void	path_cost(t_vars *vars, int x, int y);
+void	path_cost(t_vars *vars);
+int		manhattan_distance(t_vars *vars, int x1, int x2, int y1, int y2);
 
 //linked list utils
 int		get_queue_size(t_queue_data *head);
@@ -199,7 +207,7 @@ void	ft_clear_queue_data(t_queue_data **data);
 void	ft_clear_tracker_data(t_tracker_data **data);
 void	ft_clear_path_cost_data(t_path_cost_data **data);
 void	free_lists(t_vars *vars);
-
+void	add_path(t_queue *data, t_vars *vars, int cost);
 
 //gnl utils
 char	*get_next_line(int fd);
