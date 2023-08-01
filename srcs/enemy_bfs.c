@@ -6,7 +6,7 @@
 /*   By: micheng <micheng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 00:32:52 by micheng           #+#    #+#             */
-/*   Updated: 2023/08/02 04:57:12 by micheng          ###   ########.fr       */
+/*   Updated: 2023/08/02 05:03:07 by micheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,8 @@ static void	explore_neighbors(t_vars *vars,
 				return ;
 			new_step->cur_x = new_x;
 			new_step->cur_y = new_y;
+			cost = manhattan_distance(new_x, new_y, vars->pos.x, vars->pos.y);
+			add_path(new_step, vars, cost);
 			enqueue(vars->head_queue, new_step);
 			map[new_y][new_x] = 'V';
 		}
