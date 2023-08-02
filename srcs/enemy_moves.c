@@ -6,7 +6,7 @@
 /*   By: micheng <micheng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 01:02:52 by micheng           #+#    #+#             */
-/*   Updated: 2023/08/02 08:01:07 by micheng          ###   ########.fr       */
+/*   Updated: 2023/08/02 08:34:34 by micheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,9 @@ void	enemy_path(t_vars *vars)
 			vars->map[next_parent->parent_y][next_parent->parent_x] = 'X';
 			vars->pos.x_en = next_parent->parent_x;
 			vars->pos.y_en = next_parent->parent_y;
+			if (euclidean_distance(current_parent, next_parent) > 1)
+			{
+			}
 			current_tracker = vars->head_tracker->head;
 			while (current_tracker != NULL && current_tracker->next != NULL)
 			{

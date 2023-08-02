@@ -6,7 +6,7 @@
 /*   By: micheng <micheng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 14:35:05 by micheng           #+#    #+#             */
-/*   Updated: 2023/08/02 07:49:34 by micheng          ###   ########.fr       */
+/*   Updated: 2023/08/02 08:34:43 by micheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,11 @@ typedef struct s_sprites
 	void	*walls;
 }	t_sprites;
 
+typedef struct s_animations
+{
+	
+}	t_animations;
+
 //main variables for the game
 typedef struct s_vars
 {
@@ -133,7 +138,11 @@ typedef struct s_vars
 	t_game				game;
 	t_ren				render;
 	t_sprites			sprites;
+	t_animations		animations;
 }		t_vars;
+
+//animations
+void	draw_line(t_vars *vars, int x0, int y0, int x1, int y1);
 
 //map validation functions
 int		check_file(int ac, char **av, t_vars *vars);
@@ -171,6 +180,7 @@ int		y_vectors(int y, int i);
 int		is_obstacle(char c);
 void	enemy_path(t_vars *vars);
 int		manhattan_distance(t_vars *vars, int x, int y);
+int		euclidean_distance(t_parent *current, t_parent *next);
 
 //linked list utils
 int		get_queue_size(t_queue_data *head);

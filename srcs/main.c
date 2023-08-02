@@ -6,7 +6,7 @@
 /*   By: micheng <micheng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 14:50:25 by micheng           #+#    #+#             */
-/*   Updated: 2023/08/02 08:11:05 by micheng          ###   ########.fr       */
+/*   Updated: 2023/08/02 08:27:51 by micheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ int	main(int ac, char **av)
 {
 	t_vars			vars;
 
+	vars.animations.prev_enemy_x = -1;
+	vars.animations.prev_enemy_y = -1;
 	if (check_file(ac, av, &vars) && ac == 2)
 	{
 		vars.game.steps = 0;

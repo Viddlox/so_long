@@ -6,7 +6,7 @@
 /*   By: micheng <micheng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 06:24:21 by micheng           #+#    #+#             */
-/*   Updated: 2023/08/02 07:53:32 by micheng          ###   ########.fr       */
+/*   Updated: 2023/08/02 08:19:38 by micheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,4 +40,14 @@ int	is_obstacle(char c)
 int	manhattan_distance(t_vars *vars, int x, int y)
 {
 	return (abs(x - vars->pos.x) + abs(y - vars->pos.y));
+}
+
+int	euclidean_distance(t_parent *current, t_parent *next)
+{
+	int	dx;
+	int	dy;
+
+	dx = current->parent_x - next->parent_x;
+	dy = current->parent_y - next->parent_y;
+	return (sqrt(dx * dx + dy * dy));
 }
