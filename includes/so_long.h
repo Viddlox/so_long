@@ -6,7 +6,7 @@
 /*   By: micheng <micheng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 14:35:05 by micheng           #+#    #+#             */
-/*   Updated: 2023/08/02 06:45:58 by micheng          ###   ########.fr       */
+/*   Updated: 2023/08/02 07:49:34 by micheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,6 +154,7 @@ void	print_lose(char **map, t_vars *vars);
 void	print_parent_list(t_parent *head);
 void	print_tracker_list(t_tracker *head_tracker);
 void	game_loop(t_vars *vars);
+void	print_enemy_coordinates(t_pos *head);
 
 //rendering/mlx functions
 int		keypress(int code, t_vars *vars);

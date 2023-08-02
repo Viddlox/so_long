@@ -6,7 +6,7 @@
 /*   By: micheng <micheng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 05:32:52 by micheng           #+#    #+#             */
-/*   Updated: 2023/08/02 06:19:07 by micheng          ###   ########.fr       */
+/*   Updated: 2023/08/02 07:55:11 by micheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ void	init_enemy(t_vars *vars)
 	while (current != NULL)
 	{
 		init_queue_list(&vars->head_queue, vars);
+		init_parent_list(&vars->head_parent, vars);
 		add_tracked_node(current, vars);
 		en_current_step = malloc(sizeof(t_queue));
 		if (!en_current_step)

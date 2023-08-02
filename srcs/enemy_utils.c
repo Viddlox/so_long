@@ -6,7 +6,7 @@
 /*   By: micheng <micheng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 06:24:21 by micheng           #+#    #+#             */
-/*   Updated: 2023/08/02 06:54:55 by micheng          ###   ########.fr       */
+/*   Updated: 2023/08/02 07:53:32 by micheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	y_vectors(int y, int i)
 
 int	is_obstacle(char c)
 {
-	if (c == '1' || c == 'E' || c == 'C')
+	if (c == '1' || c == 'E' || c == 'C' || c == 'X')
 		return (1);
 	return (0);
 }

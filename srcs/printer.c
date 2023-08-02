@@ -6,7 +6,7 @@
 /*   By: micheng <micheng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 14:52:44 by micheng           #+#    #+#             */
-/*   Updated: 2023/08/02 02:26:03 by micheng          ###   ########.fr       */
+/*   Updated: 2023/08/02 07:49:07 by micheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,15 @@ void print_tracker_list(t_tracker *head_tracker)
         current = current->next;
     }
     printf("NULL\n");
+}
+
+void print_enemy_coordinates(t_pos *head)
+{
+    t_pos *current = head;
+
+    while (current != NULL)
+    {
+        printf("Enemy Coordinate: (%d, %d)\n", current->x_en, current->y_en);
+        current = current->next;
+    }
 }

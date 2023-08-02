@@ -6,7 +6,7 @@
 /*   By: micheng <micheng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 01:02:52 by micheng           #+#    #+#             */
-/*   Updated: 2023/08/02 07:01:46 by micheng          ###   ########.fr       */
+/*   Updated: 2023/08/02 08:01:07 by micheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,8 @@ void	enemy_path(t_vars *vars)
 
 	current_parent = vars->head_parent->head;
 	next_parent = current_parent->next;
-	print_parent_list(vars->head_parent->head);
+	// print_parent_list(vars->head_parent->head);
+	print_tracker_list(vars->head_tracker->head);
 	while (current_parent != NULL)
 	{
 		if (next_parent != NULL && is_visited(vars, next_parent)

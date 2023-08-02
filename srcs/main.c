@@ -6,7 +6,7 @@
 /*   By: micheng <micheng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 14:50:25 by micheng           #+#    #+#             */
-/*   Updated: 2023/08/02 05:35:55 by micheng          ###   ########.fr       */
+/*   Updated: 2023/08/02 08:11:05 by micheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	main(int ac, char **av)
 	{
 		vars.game.steps = 0;
 		render(&vars);
-		// system("leaks -q so_long");
+		system("leaks -q so_long");
 	}
 	else
 		ft_printf("Error: Map is invalid or not found.\n");
