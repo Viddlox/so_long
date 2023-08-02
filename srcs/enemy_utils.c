@@ -6,7 +6,7 @@
 /*   By: micheng <micheng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 06:24:21 by micheng           #+#    #+#             */
-/*   Updated: 2023/08/02 08:19:38 by micheng          ###   ########.fr       */
+/*   Updated: 2023/08/03 04:08:15 by micheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,17 @@ int	manhattan_distance(t_vars *vars, int x, int y)
 	return (abs(x - vars->pos.x) + abs(y - vars->pos.y));
 }
 
-int	euclidean_distance(t_parent *current, t_parent *next)
+void	clear_tracker_nodes(t_vars *vars)
 {
-	int	dx;
-	int	dy;
+	t_tracker	*current_tracker;
+	t_tracker	*temp;
 
-	dx = current->parent_x - next->parent_x;
-	dy = current->parent_y - next->parent_y;
-	return (sqrt(dx * dx + dy * dy));
+	current_tracker = vars->head_tracker->head;
+	while (current_tracker != NULL && current_tracker->next != NULL)
+	{
+		temp = current_tracker;
+		current_tracker = current_tracker->next;
+		free(temp);
+	}
+	vars->head_tracker->head = current_tracker;
 }
