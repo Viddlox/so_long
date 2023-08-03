@@ -6,7 +6,7 @@
 /*   By: micheng <micheng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 14:35:05 by micheng           #+#    #+#             */
-/*   Updated: 2023/08/03 04:09:02 by micheng          ###   ########.fr       */
+/*   Updated: 2023/08/03 07:52:23 by micheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ typedef struct s_pos
 	int				dy;
 	struct s_pos	*next;
 }	t_pos;
-
 
 typedef struct s_tracker
 {
@@ -104,19 +103,37 @@ typedef struct s_ren
 //static sprites
 typedef struct s_sprites
 {
-	void	*player;
+	void	*player_1;
 	void	*enemy;
-	void	*collectibles;
+	void	*collectible_1;
 	void	*exit;
 	void	*exit_unlocked;
 	void	*floors;
 	void	*walls;
 }	t_sprites;
 
-// typedef struct s_animations
-// {
-	
-// }	t_animations;
+typedef struct s_animations
+{
+	int		frame_count;
+	void	*player_left_1;
+	void	*player_left_2;
+	void	*player_left_3;
+	void	*player_right_1;
+	void	*player_right_2;
+	void	*player_right_3;
+
+	void	*enemy_left_1;
+	void	*enemy_left_2;
+	void	*enemy_right_1;
+	void	*enemy_right_2;
+
+	void	*collectible_2;
+	void	*collectible_3;
+	void	*collectible_4;
+
+	void	*enemy_teleport_1;
+	void	*enemy_teleport_2;
+}	t_animations;
 
 //main variables for the game
 typedef struct s_vars
@@ -138,11 +155,11 @@ typedef struct s_vars
 	t_game				game;
 	t_ren				render;
 	t_sprites			sprites;
-	// t_animations		animations;
+	t_animations		animations;
 }		t_vars;
 
 //animations
-void	draw_line(t_vars *vars, int x0, int y0, int x1, int y1);
+int		animation(t_vars *vars);
 
 //map validation functions
 int		check_file(int ac, char **av, t_vars *vars);
@@ -171,6 +188,7 @@ int		dest_win(t_vars *vars);
 void	render(t_vars *vars);
 void	render_sprites(t_vars *vars);
 void	render_game(t_vars *vars);
+void	render_man_game(t_vars *vars);
 
 //enemy pathfinding functions
 void	init_enemy(t_vars *vars);

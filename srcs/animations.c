@@ -6,46 +6,43 @@
 /*   By: micheng <micheng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 08:22:51 by micheng           #+#    #+#             */
-/*   Updated: 2023/08/02 17:23:15 by micheng          ###   ########.fr       */
+/*   Updated: 2023/08/03 08:06:30 by micheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// #include "so_long.h"
+#include "so_long.h"
 
-// #include <mlx.h>
-// #include <math.h>
+int	animation(t_vars *vars)
+{
+	vars->animations.frame_count++;
 
-// void draw_line(t_vars *vars, int x0, int y0, int x1, int y1)
-// {
-//     int dx = abs(x1 - x0);
-//     int dy = abs(y1 - y0);
-//     int sx, sy;
+	if (vars->animations.frame_count >= 10)
+	{
+		mlx_clear_window(vars->render.mlx, vars->render.win);
+		if (vars->sprites.player_1 == vars->animations.player_left_1)
+			vars->sprites.player_1 = vars->animations.player_left_2;
+		else if (vars->sprites.player_1 == vars->animations.player_left_2)
+			vars->sprites.player_1 = vars->animations.player_left_3;
+		else if (vars->sprites.player_1 == vars->animations.player_left_3)
+			vars->sprites.player_1 = vars->animations.player_left_1;
 
-//     if (x0 < x1)
-//         sx = 1;
-//     else
-//         sx = -1;
+		if (vars->sprites.player_1 == vars->animations.player_right_1)
+			vars->sprites.player_1 = vars->animations.player_right_2;
+		else if (vars->sprites.player_1 == vars->animations.player_right_2)
+			vars->sprites.player_1 = vars->animations.player_right_3;
+		else if (vars->sprites.player_1 == vars->animations.player_right_3)
+			vars->sprites.player_1 = vars->animations.player_right_1;
 
-//     if (y0 < y1)
-//         sy = 1;
-//     else
-//         sy = -1;
+		if (vars->sprites.collectible_1 == vars->animations.collectible_2)
+			vars->sprites.collectible_1 = vars->animations.collectible_2;
+		else if (vars->sprites.collectible_1 == vars->animations.collectible_2)
+			vars->sprites.collectible_1 = vars->animations.collectible_3;
+		else if (vars->sprites.collectible_1 == vars->animations.collectible_4)
+			vars->sprites.collectible_1 = vars->sprites.collectible_1;
 
-//     int err = dx - dy;
+		vars->animations.frame_count = 0;
+		render_sprites(vars);
+	}
 
-//     while (x0 != x1 || y0 != y1)
-//     {
-//         mlx_pixel_put(vars->render.mlx, vars->render.win, x0, y0, 0xFF0000); // Draw the pixel
-//         int e2 = 2 * err;
-//         if (e2 > -dy)
-//         {
-//             err -= dy;
-//             x0 += sx;
-//         }
-//         if (e2 < dx)
-//         {
-//             err += dx;
-//             y0 += sy;
-//         }
-//     }
-// }
+	return (0);
+}

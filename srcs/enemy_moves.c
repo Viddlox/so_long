@@ -6,21 +6,23 @@
 /*   By: micheng <micheng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 01:02:52 by micheng           #+#    #+#             */
-/*   Updated: 2023/08/03 04:09:25 by micheng          ###   ########.fr       */
+/*   Updated: 2023/08/03 05:15:19 by micheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	is_adjacent(t_vars *vars, t_parent *next)
-{
-	int	dy;
-	int	dx;
+// int	is_adjacent(t_vars *vars, t_parent *next)
+// {
+// 	int	dy;
+// 	int	dx;
 
-	dx = abs(vars->pos.x_en - next->parent_x);
-	dy = abs(vars->pos.y_en - next->parent_y);
-	return (dx <= 1 && dy == 0) || (dx == 0 && dy <= 1);
-}
+// 	dx = abs(vars->pos.x_en - next->parent_x);
+// 	dy = abs(vars->pos.y_en - next->parent_y);
+// 	printf("pos: %d, %d\n", vars->pos.y_en, vars->pos.x_en);
+// 	printf("next: %d, %d\n", next->parent_y, next->parent_x);
+// 	return (dx <= 1 && dy == 0) || (dx == 0 && dy <= 1);
+// }
 
 static int	is_closer(t_vars *vars, t_parent *next)
 {
@@ -64,6 +66,9 @@ void	enemy_path(t_vars *vars)
 	next_parent = current_parent->next;
 	while (current_parent != NULL)
 	{
+		vars->pos.x_en = current_parent->parent_x;
+		vars->pos.y_en = current_parent->parent_y;
+		print_parent_list(vars->head_parent->head);
 		if (next_parent != NULL && is_not_visited(vars, next_parent)
 			&& is_closer(vars, next_parent))
 		{
