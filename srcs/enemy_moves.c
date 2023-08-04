@@ -6,23 +6,11 @@
 /*   By: micheng <micheng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 01:02:52 by micheng           #+#    #+#             */
-/*   Updated: 2023/08/03 05:15:19 by micheng          ###   ########.fr       */
+/*   Updated: 2023/08/04 06:55:13 by micheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
-// int	is_adjacent(t_vars *vars, t_parent *next)
-// {
-// 	int	dy;
-// 	int	dx;
-
-// 	dx = abs(vars->pos.x_en - next->parent_x);
-// 	dy = abs(vars->pos.y_en - next->parent_y);
-// 	printf("pos: %d, %d\n", vars->pos.y_en, vars->pos.x_en);
-// 	printf("next: %d, %d\n", next->parent_y, next->parent_x);
-// 	return (dx <= 1 && dy == 0) || (dx == 0 && dy <= 1);
-// }
 
 static int	is_closer(t_vars *vars, t_parent *next)
 {
@@ -48,11 +36,34 @@ static int	is_not_visited(t_vars *vars, t_parent *next)
 	return (1);
 }
 
+static void	enemy_animation_state(t_vars *vars,
+	t_parent *current, t_parent *next)
+{
+	if ((next->parent_x > current->parent_x)
+		&& next->parent_y == current->parent_y)
+		vars->enemy_animation_state = ENEMY_MOVE_RIGHT;
+	else if ((next->parent_x < current->parent_x)
+		&& next->parent_y == current->parent_y)
+		vars->enemy_animation_state = ENEMY_MOVE_LEFT;
+	else if ((next->parent_y > current->parent_y)
+		&& next->parent_x == current->parent_x)
+		vars->enemy_animation_state = ENEMY_MOVE_DOWN;
+	else if ((next->parent_y < current->parent_y)
+		&& next->parent_x == current->parent_x)
+		vars->enemy_animation_state = ENEMY_MOVE_UP;
+	else
+	{
+		vars->enemy_animation_state = ENEMY_TELEPORT;
+		vars->sprites.enemy_1 = vars->animations.enemy_idle;
+	}
+}
+
 static void	move_enemy(t_vars *vars,
 	t_parent *current_parent, t_parent *next_parent)
 {
 	vars->map[current_parent->parent_y][current_parent->parent_x] = '0';
 	vars->map[next_parent->parent_y][next_parent->parent_x] = 'X';
+	enemy_animation_state(vars, current_parent, next_parent);
 	vars->pos.x_en = next_parent->parent_x;
 	vars->pos.y_en = next_parent->parent_y;
 }
@@ -68,7 +79,6 @@ void	enemy_path(t_vars *vars)
 	{
 		vars->pos.x_en = current_parent->parent_x;
 		vars->pos.y_en = current_parent->parent_y;
-		print_parent_list(vars->head_parent->head);
 		if (next_parent != NULL && is_not_visited(vars, next_parent)
 			&& is_closer(vars, next_parent))
 		{

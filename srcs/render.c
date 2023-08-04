@@ -6,59 +6,44 @@
 /*   By: micheng <micheng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 05:02:10 by micheng           #+#    #+#             */
-/*   Updated: 2023/08/03 08:01:12 by micheng          ###   ########.fr       */
+/*   Updated: 2023/08/04 06:50:15 by micheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-static void	set_animation_sprites(t_vars *vars)
+void	set_animation_sprites(t_vars *vars)
 {
-	int	x;
-	int	y;
-
-	vars->animations.collectible_2 = mlx_xpm_file_to_image(vars->render.mlx,
-			"assets/collectible_2.xpm", &x, &y);
-	vars->animations.collectible_3 = mlx_xpm_file_to_image(vars->render.mlx,
-			"assets/collectible_3.xpm", &x, &y);
-	vars->animations.collectible_4 = mlx_xpm_file_to_image(vars->render.mlx,
-			"assets/collectible_4.xpm", &x, &y);
-	vars->animations.player_left_1 = mlx_xpm_file_to_image(vars->render.mlx,
-			"assets/player_left_1.xpm", &x, &y);
-	vars->animations.player_left_2 = mlx_xpm_file_to_image(vars->render.mlx,
-			"assets/player_left_2.xpm", &x, &y);
-	vars->animations.player_left_3 = mlx_xpm_file_to_image(vars->render.mlx,
-			"assets/player_left_3.xpm", &x, &y);
-	vars->animations.player_right_1 = mlx_xpm_file_to_image(vars->render.mlx,
-			"assets/player_right_1.xpm", &x, &y);
-	vars->animations.player_right_2 = mlx_xpm_file_to_image(vars->render.mlx,
-			"assets/player_right_2.xpm", &x, &y);
-	vars->animations.player_right_3 = mlx_xpm_file_to_image(vars->render.mlx,
-			"assets/player_right_3.xpm", &x, &y);
+	collectibles_anim_init(vars);
+	player_anim_init_1(vars);
+	player_anim_init_2(vars);
+	if (vars->en_count > 0)
+	{
+		enemy_anim_init_1(vars);
+		enemy_anim_init_2(vars);
+	}
 }
 
-static void	init_sprites(t_vars *vars)
+void	init_sprites(t_vars *vars)
 {
 	int	x;
 	int	y;
 
-	vars->sprites.collectible_1 = mlx_xpm_file_to_image(vars->render.mlx,
-			"assets/collectible_1.xpm", &x, &y);
 	vars->sprites.walls = mlx_xpm_file_to_image(vars->render.mlx,
 			"assets/wall.xpm", &x, &y);
 	vars->sprites.floors = mlx_xpm_file_to_image(vars->render.mlx,
 			"assets/floor.xpm", &x, &y);
-	vars->sprites.player_1 = mlx_xpm_file_to_image(vars->render.mlx,
-			"assets/player_idle.xpm", &x, &y);
-	vars->sprites.enemy = mlx_xpm_file_to_image(vars->render.mlx,
-			"assets/enemy.xpm", &x, &y);
 	vars->sprites.exit = mlx_xpm_file_to_image(vars->render.mlx,
 			"assets/exit.xpm", &x, &y);
 	vars->sprites.exit_unlocked = mlx_xpm_file_to_image(vars->render.mlx,
 			"assets/exit_unlocked.xpm", &x, &y);
+	set_animation_sprites(vars);
+	vars->sprites.player_1 = vars->animations.player_idle;
+	vars->sprites.collectible_1 = vars->animations.collectible_1;
+	vars->sprites.enemy_1 = vars->animations.enemy_idle;
 }
 
-static void	set_sprites(t_vars *vars, int x, int y)
+void	set_sprites(t_vars *vars, int x, int y)
 {
 	if (vars->map[y][x] == '1')
 		mlx_put_image_to_window(vars->render.mlx,vars->render.win,
@@ -77,7 +62,7 @@ static void	set_sprites(t_vars *vars, int x, int y)
 			vars->render.win, vars->sprites.exit, x * 32, y * 32);
 	else if (vars->map[y][x] == 'X')
 		mlx_put_image_to_window(vars->render.mlx,
-			vars->render.win, vars->sprites.enemy, x * 32, y * 32);
+			vars->render.win, vars->sprites.enemy_1, x * 32, y * 32);
 }
 
 void	render_sprites(t_vars *vars)
@@ -98,21 +83,23 @@ void	render_sprites(t_vars *vars)
 	}
 }
 
-void	render(t_vars *vars)
+int	animation(t_vars *vars)
 {
-	vars->render.mlx = mlx_init();
-	vars->render.win = mlx_new_window(vars->render.mlx,
-			vars->map_l * 32, vars->map_h * 32, "so_long");
-	init_sprites(vars);
-	set_animation_sprites(vars);
-
-	if (vars->en_count > 0)
-		game_loop(vars);
-	else
+	vars->animations.frame_count++;
+	if (vars->animations.frame_count >= 1000)
 	{
-		mlx_hook(vars->render.win, 2, (1L << 0), keypress, vars);
-		mlx_hook(vars->render.win, 17, 0L, dest_win, vars);
-		mlx_loop_hook(vars->render.mlx, (int (*)(void *))animation, vars);
-		mlx_loop(vars->render.mlx);
+		mlx_clear_window(vars->render.mlx, vars->render.win);
+		collectible_animation(vars);
+		player_animation_left_right(vars);
+		player_animation_up_down(vars);
+		if (vars->en_count > 0)
+		{
+			enemy_animation_left_right(vars);
+			enemy_animation_up_down(vars);
+		}
+		vars->animations.frame_count = 0;
+		render_sprites(vars);
 	}
+	return (0);
 }
+

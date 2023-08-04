@@ -6,43 +6,106 @@
 /*   By: micheng <micheng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 08:22:51 by micheng           #+#    #+#             */
-/*   Updated: 2023/08/03 08:06:30 by micheng          ###   ########.fr       */
+/*   Updated: 2023/08/04 06:32:18 by micheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	animation(t_vars *vars)
+void	collectible_animation(t_vars *vars)
 {
-	vars->animations.frame_count++;
+	if (vars->sprites.collectible_1 == vars->animations.collectible_1)
+		vars->sprites.collectible_1 = vars->animations.collectible_2;
+	else if (vars->sprites.collectible_1 == vars->animations.collectible_2)
+		vars->sprites.collectible_1 = vars->animations.collectible_3;
+	else if (vars->sprites.collectible_1 == vars->animations.collectible_3)
+		vars->sprites.collectible_1 = vars->animations.collectible_1;
+}
 
-	if (vars->animations.frame_count >= 10)
+void	player_animation_left_right(t_vars *vars)
+{
+	if (vars->player_animation_state == PLAYER_MOVE_LEFT)
 	{
-		mlx_clear_window(vars->render.mlx, vars->render.win);
 		if (vars->sprites.player_1 == vars->animations.player_left_1)
 			vars->sprites.player_1 = vars->animations.player_left_2;
 		else if (vars->sprites.player_1 == vars->animations.player_left_2)
 			vars->sprites.player_1 = vars->animations.player_left_3;
 		else if (vars->sprites.player_1 == vars->animations.player_left_3)
-			vars->sprites.player_1 = vars->animations.player_left_1;
-
+			vars->sprites.player_1 = vars->animations.player_idle;
+	}
+	else if (vars->player_animation_state == PLAYER_MOVE_RIGHT)
+	{
 		if (vars->sprites.player_1 == vars->animations.player_right_1)
 			vars->sprites.player_1 = vars->animations.player_right_2;
 		else if (vars->sprites.player_1 == vars->animations.player_right_2)
 			vars->sprites.player_1 = vars->animations.player_right_3;
 		else if (vars->sprites.player_1 == vars->animations.player_right_3)
-			vars->sprites.player_1 = vars->animations.player_right_1;
-
-		if (vars->sprites.collectible_1 == vars->animations.collectible_2)
-			vars->sprites.collectible_1 = vars->animations.collectible_2;
-		else if (vars->sprites.collectible_1 == vars->animations.collectible_2)
-			vars->sprites.collectible_1 = vars->animations.collectible_3;
-		else if (vars->sprites.collectible_1 == vars->animations.collectible_4)
-			vars->sprites.collectible_1 = vars->sprites.collectible_1;
-
-		vars->animations.frame_count = 0;
-		render_sprites(vars);
+			vars->sprites.player_1 = vars->animations.player_idle;
 	}
+	return ;
+}
 
-	return (0);
+void	player_animation_up_down(t_vars *vars)
+{
+	if (vars->player_animation_state == PLAYER_MOVE_UP)
+	{
+		if (vars->sprites.player_1 == vars->animations.player_up_1)
+			vars->sprites.player_1 = vars->animations.player_up_2;
+		else if (vars->sprites.player_1 == vars->animations.player_up_2)
+			vars->sprites.player_1 = vars->animations.player_up_3;
+		else if (vars->sprites.player_1 == vars->animations.player_up_3)
+			vars->sprites.player_1 = vars->animations.player_idle;
+	}
+	else if (vars->player_animation_state == PLAYER_MOVE_DOWN)
+	{
+		if (vars->sprites.player_1 == vars->animations.player_down_1)
+			vars->sprites.player_1 = vars->animations.player_down_2;
+		else if (vars->sprites.player_1 == vars->animations.player_down_2)
+			vars->sprites.player_1 = vars->animations.player_idle;
+	}
+	return ;
+}
+
+void	enemy_animation_up_down(t_vars *vars)
+{
+	if (vars->enemy_animation_state == ENEMY_MOVE_UP)
+	{
+		if (vars->sprites.enemy_1 == vars->animations.enemy_up_1)
+			vars->sprites.enemy_1 = vars->animations.enemy_up_2;
+		else if (vars->sprites.enemy_1 == vars->animations.enemy_up_2)
+			vars->sprites.enemy_1 = vars->animations.enemy_up_3;
+		else if (vars->sprites.enemy_1 == vars->animations.enemy_up_3)
+			vars->sprites.enemy_1 = vars->animations.enemy_idle;
+	}
+	else if (vars->enemy_animation_state == ENEMY_MOVE_DOWN)
+	{
+		if (vars->sprites.enemy_1 == vars->animations.enemy_down_1)
+			vars->sprites.enemy_1 = vars->animations.enemy_down_2;
+		else if (vars->sprites.enemy_1 == vars->animations.enemy_down_2)
+			vars->sprites.enemy_1 = vars->animations.enemy_idle;
+	}
+	return ;
+}
+
+void	enemy_animation_left_right(t_vars *vars)
+{
+	if (vars->enemy_animation_state == ENEMY_MOVE_LEFT)
+	{
+		if (vars->sprites.enemy_1 == vars->animations.enemy_left_1)
+			vars->sprites.enemy_1 = vars->animations.enemy_left_2;
+		else if (vars->sprites.enemy_1 == vars->animations.enemy_left_2)
+			vars->sprites.enemy_1 = vars->animations.enemy_left_3;
+		else if (vars->sprites.enemy_1 == vars->animations.enemy_left_3)
+			vars->sprites.enemy_1 = vars->animations.enemy_idle;
+	}
+	else if (vars->enemy_animation_state == ENEMY_MOVE_RIGHT)
+	{
+		if (vars->sprites.enemy_1 == vars->animations.enemy_right_1)
+			vars->sprites.enemy_1 = vars->animations.enemy_right_2;
+		else if (vars->sprites.enemy_1 == vars->animations.enemy_right_2)
+			vars->sprites.enemy_1 = vars->animations.enemy_right_3;
+		else if (vars->sprites.enemy_1 == vars->animations.enemy_right_3)
+			vars->sprites.enemy_1 = vars->animations.enemy_idle;
+	}
+	return ;
 }

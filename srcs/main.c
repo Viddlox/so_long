@@ -6,7 +6,7 @@
 /*   By: micheng <micheng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 14:50:25 by micheng           #+#    #+#             */
-/*   Updated: 2023/08/03 07:59:21 by micheng          ###   ########.fr       */
+/*   Updated: 2023/08/04 06:57:03 by micheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ int	dest_win(t_vars *vars)
 	mlx_destroy_window(vars->render.mlx, vars->render.win);
 	free_map(vars->map, vars);
 	free(vars->render.mlx);
-	free_lists(vars);
+	if (vars->en_count > 0)
+		free_lists(vars);
 	exit(0);
 }
 
@@ -58,11 +59,23 @@ int	main(int ac, char **av)
 	if (check_file(ac, av, &vars) && ac == 2)
 	{
 		vars.game.steps = 0;
-		render(&vars);
-		system("leaks -q so_long");
+		vars.render.mlx = mlx_init();
+		vars.render.win = mlx_new_window(vars.render.mlx,
+				vars.map_l * 32, vars.map_h * 32, "so_long");
+		init_sprites(&vars);
+		render_sprites(&vars);
+		if (vars.en_count > 0)
+			enemy_loop(&vars);
+		else
+		{
+			mlx_hook(vars.render.win, 2, (1L << 0), keypress, &vars);
+			mlx_hook(vars.render.win, 17, 0L, dest_win, &vars);
+			mlx_loop_hook(vars.render.mlx, animation, &vars);
+			mlx_loop(vars.render.mlx);
+		}
+		// system("leaks -q so_long");
 	}
 	else
 		ft_printf("Error: Map is invalid or not found.\n");
-	free_lists(&vars);
 	return (0);
 }

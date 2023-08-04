@@ -1,21 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   events.c                                           :+:      :+:    :+:   */
+/*   enemy_loop.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: micheng <micheng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 23:54:57 by micheng           #+#    #+#             */
-/*   Updated: 2023/08/03 07:55:12 by micheng          ###   ########.fr       */
+/*   Updated: 2023/08/04 06:47:32 by micheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
-void	render_man_game(t_vars *vars)
-{
-	animation(vars);
-}
 
 void	render_game(t_vars *vars)
 {
@@ -36,7 +31,7 @@ void	render_game(t_vars *vars)
 	render_sprites(vars);
 }
 
-void	game_loop(t_vars *vars)
+void	enemy_loop(t_vars *vars)
 {
 	mlx_hook(vars->render.win, 2, (1L << 0), keypress, vars);
 	mlx_hook(vars->render.win, 17, 0L, dest_win, vars);

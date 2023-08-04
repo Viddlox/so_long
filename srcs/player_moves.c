@@ -6,7 +6,7 @@
 /*   By: micheng <micheng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 00:07:57 by micheng           #+#    #+#             */
-/*   Updated: 2023/07/27 18:39:31 by micheng          ###   ########.fr       */
+/*   Updated: 2023/08/04 04:10:21 by micheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ int	move_up(t_vars *vars)
 	vars->pos.y--;
 	if (vars->c_count == 0)
 		vars->sprites.exit = vars->sprites.exit_unlocked;
+	vars->sprites.player_1 = vars->animations.player_up_1;
+	vars->player_animation_state = PLAYER_MOVE_UP;
 	vars->game.steps++;
 	mlx_clear_window(vars->render.mlx, vars->render.win);
 	return (0);
@@ -53,6 +55,8 @@ int	move_down(t_vars *vars)
 	vars->pos.y++;
 	if (vars->c_count == 0)
 		vars->sprites.exit = vars->sprites.exit_unlocked;
+	vars->sprites.player_1 = vars->animations.player_down_1;
+	vars->player_animation_state = PLAYER_MOVE_DOWN;
 	vars->game.steps++;
 	mlx_clear_window(vars->render.mlx, vars->render.win);
 	return (0);
@@ -76,6 +80,8 @@ int	move_right(t_vars *vars)
 	vars->pos.x++;
 	if (vars->c_count == 0)
 		vars->sprites.exit = vars->sprites.exit_unlocked;
+	vars->sprites.player_1 = vars->animations.player_right_1;
+	vars->player_animation_state = PLAYER_MOVE_RIGHT;
 	vars->game.steps++;
 	mlx_clear_window(vars->render.mlx, vars->render.win);
 	return (0);
@@ -99,6 +105,8 @@ int	move_left(t_vars *vars)
 	vars->pos.x--;
 	if (vars->c_count == 0)
 		vars->sprites.exit = vars->sprites.exit_unlocked;
+	vars->sprites.player_1 = vars->animations.player_left_1;
+	vars->player_animation_state = PLAYER_MOVE_LEFT;
 	vars->game.steps++;
 	mlx_clear_window(vars->render.mlx, vars->render.win);
 	return (0);
