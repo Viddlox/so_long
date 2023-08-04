@@ -6,7 +6,7 @@
 /*   By: micheng <micheng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 01:02:52 by micheng           #+#    #+#             */
-/*   Updated: 2023/08/04 23:33:40 by micheng          ###   ########.fr       */
+/*   Updated: 2023/08/05 06:48:33 by micheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,20 +41,32 @@ static void	enemy_animation_state(t_vars *vars,
 {
 	if ((next->parent_x > current->parent_x)
 		&& next->parent_y == current->parent_y)
+	{
+		vars->sprites.enemy_1 = vars->animations.enemy_right_1;
 		vars->enemy_animation_state = ENEMY_MOVE_RIGHT;
+	}
 	else if ((next->parent_x < current->parent_x)
 		&& next->parent_y == current->parent_y)
+	{
+		vars->sprites.enemy_1 = vars->animations.enemy_left_1;
 		vars->enemy_animation_state = ENEMY_MOVE_LEFT;
+	}
 	else if ((next->parent_y > current->parent_y)
 		&& next->parent_x == current->parent_x)
+	{
+		vars->sprites.enemy_1 = vars->animations.enemy_down_1;
 		vars->enemy_animation_state = ENEMY_MOVE_DOWN;
+	}
 	else if ((next->parent_y < current->parent_y)
 		&& next->parent_x == current->parent_x)
+	{
+		vars->sprites.enemy_1 = vars->animations.enemy_up_1;
 		vars->enemy_animation_state = ENEMY_MOVE_UP;
+	}
 	else
 	{
-		vars->enemy_animation_state = ENEMY_TELEPORT;
 		vars->sprites.enemy_1 = vars->animations.enemy_idle;
+		vars->enemy_animation_state = ENEMY_TELEPORT;
 	}
 }
 
@@ -63,9 +75,9 @@ static void	move_enemy(t_vars *vars,
 {
 	vars->map[current_parent->parent_y][current_parent->parent_x] = '0';
 	vars->map[next_parent->parent_y][next_parent->parent_x] = 'X';
-	enemy_animation_state(vars, current_parent, next_parent);
 	vars->pos.x_en = next_parent->parent_x;
 	vars->pos.y_en = next_parent->parent_y;
+	enemy_animation_state(vars, current_parent, next_parent);
 }
 
 void	enemy_path(t_vars *vars)
@@ -82,8 +94,8 @@ void	enemy_path(t_vars *vars)
 		if (next_parent != NULL && is_not_visited(vars, next_parent)
 			&& is_closer(vars, next_parent))
 		{
-			move_enemy(vars, current_parent, next_parent);
 			clear_tracker_nodes(vars);
+			move_enemy(vars, current_parent, next_parent);
 			current_parent = current_parent->next;
 			if (vars->pos.x == vars->pos.x_en && vars->pos.y == vars->pos.y_en)
 				print_lose(vars->map, vars);

@@ -6,7 +6,7 @@
 /*   By: micheng <micheng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 14:50:25 by micheng           #+#    #+#             */
-/*   Updated: 2023/08/05 05:57:24 by micheng          ###   ########.fr       */
+/*   Updated: 2023/08/05 06:39:14 by micheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ int	main(int ac, char **av)
 	t_vars			vars;
 
 	vars.animations.frame_count = 0;
+	vars.animations.en_speed = 0;
 	if (check_file(ac, av, &vars) && ac == 2)
 	{
 		vars.game.steps = 0;
@@ -64,18 +65,11 @@ int	main(int ac, char **av)
 				vars.map_l * 32, vars.map_h * 32, "so_long");
 		init_sprites(&vars);
 		render_sprites(&vars);
-		if (vars.en_count > 0)
-		{
-			init_tracker_list(&vars.head_tracker, &vars);
-			enemy_loop(&vars);
-		}
-		else
-		{
-			mlx_hook(vars.render.win, 2, (1L << 0), keypress, &vars);
-			mlx_hook(vars.render.win, 17, 0L, dest_win, &vars);
-			mlx_loop_hook(vars.render.mlx, animation, &vars);
-			mlx_loop(vars.render.mlx);
-		}
+		init_tracker_list(&vars.head_tracker, &vars);
+		mlx_hook(vars.render.win, 2, (1L << 0), keypress, &vars);
+		mlx_hook(vars.render.win, 17, 0L, dest_win, &vars);
+		mlx_loop_hook(vars.render.mlx, animation, &vars);
+		mlx_loop(vars.render.mlx);
 		// system("leaks -q so_long");
 	}
 	else

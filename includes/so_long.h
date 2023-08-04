@@ -6,7 +6,7 @@
 /*   By: micheng <micheng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 14:35:05 by micheng           #+#    #+#             */
-/*   Updated: 2023/08/04 16:59:44 by micheng          ###   ########.fr       */
+/*   Updated: 2023/08/05 06:38:55 by micheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,7 @@ typedef enum s_enemy_anim_state
 typedef struct s_animations
 {
 	int		frame_count;
+	int		en_speed;
 	void	*player_idle;
 	void	*player_left_1;
 	void	*player_left_2;
@@ -214,14 +215,12 @@ void	print_win(char **map, t_vars *vars);
 void	print_lose(char **map, t_vars *vars);
 void	print_parent_list(t_parent *head);
 void	print_tracker_list(t_tracker *head_tracker);
-void	enemy_loop(t_vars *vars);
 void	print_enemy_coordinates(t_pos *head);
 
 //rendering/mlx functions
 int		keypress(int code, t_vars *vars);
 int		dest_win(t_vars *vars);
 void	render_sprites(t_vars *vars);
-void	render_game(t_vars *vars);
 void	render_man_game(t_vars *vars);
 void	set_animation_sprites(t_vars *vars);
 void	init_sprites(t_vars *vars);

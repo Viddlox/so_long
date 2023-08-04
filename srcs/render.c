@@ -6,7 +6,7 @@
 /*   By: micheng <micheng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 05:02:10 by micheng           #+#    #+#             */
-/*   Updated: 2023/08/05 05:49:52 by micheng          ###   ########.fr       */
+/*   Updated: 2023/08/05 06:44:39 by micheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,8 +91,12 @@ int	animation(t_vars *vars)
 		player_animation_up_down(vars);
 		if (vars->en_count > 0)
 		{
+			init_pos_list(&vars->head_pos, vars);
+			init_parent_list(&vars->head_parent, vars);
+			init_enemy(vars);
 			enemy_animation_left_right(vars);
 			enemy_animation_up_down(vars);
+			free_lists(vars);
 		}
 		vars->animations.frame_count = 0;
 		render_sprites(vars);
