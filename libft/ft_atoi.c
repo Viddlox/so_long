@@ -6,7 +6,7 @@
 /*   By: micheng <micheng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 17:14:37 by mcheng            #+#    #+#             */
-/*   Updated: 2023/05/08 16:23:47 by micheng          ###   ########.fr       */
+/*   Updated: 2023/08/05 01:49:11 by micheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,16 +37,15 @@ int	ft_atoi(const char *str)
 	}
 	return (res * sign);
 }
-/*
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 
-int	main(void)
-{
-	const char *str = "----123";
-	const char *str1 = "----123";
-	printf("%d\n", atoi(str));
-	printf("%d\n", ft_atoi(str1));
-}
-*/
+// #include <stdio.h>
+// #include <stdlib.h>
+// #include <string.h>
+
+// int	main(void)
+// {
+// 	const char *str = "    -123";
+// 	const char *str1 = "    -123";
+// 	printf("%d\n", atoi(str));
+// 	printf("%d\n", ft_atoi(str1));
+// }

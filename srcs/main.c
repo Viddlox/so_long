@@ -6,7 +6,7 @@
 /*   By: micheng <micheng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 14:50:25 by micheng           #+#    #+#             */
-/*   Updated: 2023/08/04 06:57:03 by micheng          ###   ########.fr       */
+/*   Updated: 2023/08/05 05:57:24 by micheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,10 @@ int	main(int ac, char **av)
 		init_sprites(&vars);
 		render_sprites(&vars);
 		if (vars.en_count > 0)
+		{
+			init_tracker_list(&vars.head_tracker, &vars);
 			enemy_loop(&vars);
+		}
 		else
 		{
 			mlx_hook(vars.render.win, 2, (1L << 0), keypress, &vars);

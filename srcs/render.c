@@ -6,7 +6,7 @@
 /*   By: micheng <micheng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 05:02:10 by micheng           #+#    #+#             */
-/*   Updated: 2023/08/04 06:50:15 by micheng          ###   ########.fr       */
+/*   Updated: 2023/08/05 05:49:52 by micheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,8 @@ void	set_animation_sprites(t_vars *vars)
 	collectibles_anim_init(vars);
 	player_anim_init_1(vars);
 	player_anim_init_2(vars);
-	if (vars->en_count > 0)
-	{
-		enemy_anim_init_1(vars);
-		enemy_anim_init_2(vars);
-	}
+	enemy_anim_init_1(vars);
+	enemy_anim_init_2(vars);
 }
 
 void	init_sprites(t_vars *vars)
@@ -86,7 +83,7 @@ void	render_sprites(t_vars *vars)
 int	animation(t_vars *vars)
 {
 	vars->animations.frame_count++;
-	if (vars->animations.frame_count >= 1000)
+	if (vars->animations.frame_count >= 2000)
 	{
 		mlx_clear_window(vars->render.mlx, vars->render.win);
 		collectible_animation(vars);
