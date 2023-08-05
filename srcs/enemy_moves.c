@@ -6,7 +6,7 @@
 /*   By: micheng <micheng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 01:02:52 by micheng           #+#    #+#             */
-/*   Updated: 2023/08/05 06:48:33 by micheng          ###   ########.fr       */
+/*   Updated: 2023/08/05 08:17:36 by micheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,15 +91,19 @@ void	enemy_path(t_vars *vars)
 	{
 		vars->pos.x_en = current_parent->parent_x;
 		vars->pos.y_en = current_parent->parent_y;
+		if (vars->play_dead == 1 && next_parent != NULL
+			&& is_not_visited(vars, next_parent))
+		{
+			move_enemy(vars, current_parent, next_parent);
+			return ;
+		}
 		if (next_parent != NULL && is_not_visited(vars, next_parent)
 			&& is_closer(vars, next_parent))
 		{
 			clear_tracker_nodes(vars);
 			move_enemy(vars, current_parent, next_parent);
-			current_parent = current_parent->next;
 			if (vars->pos.x == vars->pos.x_en && vars->pos.y == vars->pos.y_en)
 				print_lose(vars->map, vars);
-			mlx_clear_window(vars->render.mlx, vars->render.win);
 			return ;
 		}
 		else

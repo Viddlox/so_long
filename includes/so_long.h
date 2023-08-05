@@ -6,7 +6,7 @@
 /*   By: micheng <micheng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 14:35:05 by micheng           #+#    #+#             */
-/*   Updated: 2023/08/05 06:38:55 by micheng          ###   ########.fr       */
+/*   Updated: 2023/08/05 09:44:58 by micheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,7 @@ typedef struct s_sprites
 	void	*exit_unlocked;
 	void	*floors;
 	void	*walls;
+	void	*player_dead;
 }	t_sprites;
 
 typedef enum s_player_anim_state
@@ -125,7 +126,6 @@ typedef enum s_enemy_anim_state
 typedef struct s_animations
 {
 	int		frame_count;
-	int		en_speed;
 	void	*player_idle;
 	void	*player_left_1;
 	void	*player_left_2;
@@ -171,6 +171,8 @@ typedef struct s_vars
 	char				**map;
 	int					map_h;
 	int					map_l;
+	int					play_dead;
+	int					enemy_trapped;
 	t_pos_data			*head_pos;
 	t_queue_data		*head_queue;
 	t_parent_data		*head_parent;
@@ -204,11 +206,12 @@ int		check_path(t_vars *vars);
 void	free_map(char **map, t_vars *vars);
 char	**clone_map(t_vars *vars);
 
-//movement functions
+//player controls
 int		move_up(t_vars *vars);
 int		move_down(t_vars *vars);
 int		move_left(t_vars *vars);
 int		move_right(t_vars *vars);
+void	play_dead(t_vars *vars);
 
 //event functions
 void	print_win(char **map, t_vars *vars);

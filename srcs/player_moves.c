@@ -6,14 +6,37 @@
 /*   By: micheng <micheng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 00:07:57 by micheng           #+#    #+#             */
-/*   Updated: 2023/08/04 04:10:21 by micheng          ###   ########.fr       */
+/*   Updated: 2023/08/05 08:33:27 by micheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
+// void	play_loc(t_vars *vars)
+// {
+// 	int	x;
+// 	int	y;
+
+// 	y = 0;
+// 	while (vars->map[y++])
+// 	{
+// 		x = 0;
+// 		while (vars->map[y][x++])
+// 		{
+// 			if (vars->map[y][x] == 'P')
+// 			{
+// 				vars->pos.y = y;
+// 				vars->pos.x = x;
+// 				return ;
+// 			}
+// 		}
+// 	}
+// }
+
 int	move_up(t_vars *vars)
 {
+	vars->play_dead = 0;
+	// play_loc(vars);
 	if (vars->map[vars->pos.y - 1][vars->pos.x] == '1')
 		return (0);
 	if (vars->map[vars->pos.y - 1][vars->pos.x] == 'X')
@@ -33,12 +56,13 @@ int	move_up(t_vars *vars)
 	vars->sprites.player_1 = vars->animations.player_up_1;
 	vars->player_animation_state = PLAYER_MOVE_UP;
 	vars->game.steps++;
-	mlx_clear_window(vars->render.mlx, vars->render.win);
 	return (0);
 }
 
 int	move_down(t_vars *vars)
 {
+	vars->play_dead = 0;
+	// play_loc(vars);
 	if (vars->map[vars->pos.y + 1][vars->pos.x] == '1')
 		return (0);
 	if (vars->map[vars->pos.y + 1][vars->pos.x] == 'X')
@@ -58,12 +82,13 @@ int	move_down(t_vars *vars)
 	vars->sprites.player_1 = vars->animations.player_down_1;
 	vars->player_animation_state = PLAYER_MOVE_DOWN;
 	vars->game.steps++;
-	mlx_clear_window(vars->render.mlx, vars->render.win);
 	return (0);
 }
 
 int	move_right(t_vars *vars)
 {
+	vars->play_dead = 0;
+	// play_loc(vars);
 	if (vars->map[vars->pos.y][vars->pos.x + 1] == '1')
 		return (0);
 	if (vars->map[vars->pos.y][vars->pos.x + 1] == 'X')
@@ -83,12 +108,13 @@ int	move_right(t_vars *vars)
 	vars->sprites.player_1 = vars->animations.player_right_1;
 	vars->player_animation_state = PLAYER_MOVE_RIGHT;
 	vars->game.steps++;
-	mlx_clear_window(vars->render.mlx, vars->render.win);
 	return (0);
 }
 
 int	move_left(t_vars *vars)
 {
+	vars->play_dead = 0;
+	// play_loc(vars);
 	if (vars->map[vars->pos.y][vars->pos.x - 1] == '1')
 		return (0);
 	if (vars->map[vars->pos.y][vars->pos.x - 1] == 'X')
@@ -108,6 +134,5 @@ int	move_left(t_vars *vars)
 	vars->sprites.player_1 = vars->animations.player_left_1;
 	vars->player_animation_state = PLAYER_MOVE_LEFT;
 	vars->game.steps++;
-	mlx_clear_window(vars->render.mlx, vars->render.win);
 	return (0);
 }

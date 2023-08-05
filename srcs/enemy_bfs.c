@@ -6,7 +6,7 @@
 /*   By: micheng <micheng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 00:32:52 by micheng           #+#    #+#             */
-/*   Updated: 2023/08/02 06:34:20 by micheng          ###   ########.fr       */
+/*   Updated: 2023/08/05 08:40:26 by micheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,6 @@ int	bfs(t_vars *vars, t_queue *new_step)
 		{
 			free(current_step);
 			free_map(map, vars);
-			ft_clear_queue_data(&vars->head_queue);
 			vars->head_queue = NULL;
 			ft_printf("Target found.\n");
 			return (1);
