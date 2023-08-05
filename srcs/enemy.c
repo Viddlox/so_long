@@ -6,7 +6,7 @@
 /*   By: micheng <micheng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 05:32:52 by micheng           #+#    #+#             */
-/*   Updated: 2023/08/05 10:54:42 by micheng          ###   ########.fr       */
+/*   Updated: 2023/08/06 01:20:41 by micheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,12 +81,12 @@ void	init_enemy(t_vars *vars)
 	current = vars->head_pos->head;
 	while (current != NULL)
 	{
-		if (vars->play_dead == 1 || (vars->enemy_trapped == 1
-				&& vars->enemy_trapped_count >= 0))
+		if (vars->play_dead == 1 || (vars->pos.enemy_trapped == 1
+				&& vars->pos.enemy_trapped_count >= 0))
 		{
-			vars->enemy_trapped_count--;
-			if (vars->enemy_trapped_count == 0)
-				vars->enemy_trapped = 0;
+			vars->pos.enemy_trapped_count--;
+			if (vars->pos.enemy_trapped_count == 0)
+				vars->pos.enemy_trapped = 0;
 			break ;
 		}
 		init_queue_list(&vars->head_queue, vars);

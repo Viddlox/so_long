@@ -6,7 +6,7 @@
 /*   By: micheng <micheng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 14:35:05 by micheng           #+#    #+#             */
-/*   Updated: 2023/08/05 10:50:18 by micheng          ###   ########.fr       */
+/*   Updated: 2023/08/06 01:21:51 by micheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ typedef struct s_pos
 	int				prev_en_y;
 	int				dx;
 	int				dy;
+	int				enemy_trapped;
+	int				enemy_trapped_count;
 	struct s_pos	*next;
 }	t_pos;
 
@@ -181,8 +183,6 @@ typedef struct s_vars
 	int					map_h;
 	int					map_l;
 	int					play_dead;
-	int					enemy_trapped;
-	int					enemy_trapped_count;
 	t_pos_data			*head_pos;
 	t_queue_data		*head_queue;
 	t_parent_data		*head_parent;
