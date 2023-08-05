@@ -6,7 +6,7 @@
 /*   By: micheng <micheng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 14:35:05 by micheng           #+#    #+#             */
-/*   Updated: 2023/08/06 01:21:51 by micheng          ###   ########.fr       */
+/*   Updated: 2023/08/06 04:11:32 by micheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,22 @@ typedef struct s_pos
 	int				prev_en_y;
 	int				dx;
 	int				dy;
-	int				enemy_trapped;
-	int				enemy_trapped_count;
 	struct s_pos	*next;
 }	t_pos;
+
+typedef struct s_trap
+{
+	int				x;
+	int				y;
+	int				enemy_trapped;
+	int				enemy_trapped_count;
+	struct s_trap	*next;
+}	t_trap;
+
+typedef struct s_trap_data
+{
+	t_trap	*head;
+}	t_trap_data;
 
 typedef struct s_tracker
 {
@@ -61,6 +73,7 @@ typedef struct s_tracker
 	int					y;
 	struct s_tracker	*next;
 }	t_tracker;
+
 
 typedef struct s_tracker_data
 {
@@ -187,6 +200,7 @@ typedef struct s_vars
 	t_queue_data		*head_queue;
 	t_parent_data		*head_parent;
 	t_tracker_data		*head_tracker;
+	t_trap_data			*head_trap;
 	t_pos				pos;
 	t_game				game;
 	t_ren				render;
@@ -240,7 +254,7 @@ void	init_sprites(t_vars *vars);
 void	set_sprites(t_vars *vars, int x, int y);
 void	render_sprites(t_vars *vars);
 
-//enemy pathfinding functions
+//enemy functions
 void	init_enemy(t_vars *vars);
 int		bfs(t_vars *vars, t_queue *new_step);
 int		x_vectors(int x, int i);
@@ -248,7 +262,7 @@ int		y_vectors(int y, int i);
 int		is_obstacle(char c);
 void	enemy_path(t_vars *vars);
 int		manhattan_distance(t_vars *vars, int x, int y);
-void	clear_tracker_nodes(t_vars *vars);
+void	enemy_trap_mechanics(t_vars *vars, t_parent *current, t_parent *next);
 
 //linked list utils
 int		get_queue_size(t_queue_data *head);
@@ -257,9 +271,12 @@ void	init_parent_list(t_parent_data **data, t_vars *vars);
 void	init_queue_list(t_queue_data **data, t_vars *vars);
 void	init_pos_list(t_pos_data **data, t_vars *vars);
 void	init_tracker_list(t_tracker_data **data, t_vars *vars);
+void	init_trapped_enemies_list(t_trap_data **data, t_vars *vars);
 void	ft_clear_parent_data(t_parent_data **data);
 void	ft_clear_pos_data(t_pos_data **data);
 void	ft_clear_queue_data(t_queue_data **data);
+void	ft_clear_trapped_list_data(t_trap_data **data);
+void	clear_tracker_nodes(t_vars *vars);
 void	free_lists(t_vars *vars);
 void	add_path(t_queue *data, t_vars *vars, int cost);
 

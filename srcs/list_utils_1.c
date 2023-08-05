@@ -6,7 +6,7 @@
 /*   By: micheng <micheng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/23 19:36:24 by micheng           #+#    #+#             */
-/*   Updated: 2023/08/05 12:00:27 by micheng          ###   ########.fr       */
+/*   Updated: 2023/08/06 04:09:39 by micheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	init_tracker_list(t_tracker_data **data, t_vars *vars)
 	else
 	{
 		fprintf(stderr, "Error: Memory allocation failed for data.\n");
-		ft_lstclear((t_list **)vars->head_parent, &ft_del);
+		ft_lstclear((t_list **)vars->head_tracker, &ft_del);
 		return ;
 	}
 }
