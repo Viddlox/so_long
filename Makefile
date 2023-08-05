@@ -6,13 +6,13 @@
 #    By: micheng <micheng@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/02 02:14:08 by micheng           #+#    #+#              #
-#    Updated: 2023/08/05 01:31:43 by micheng          ###   ########.fr        #
+#    Updated: 2023/08/05 11:03:44 by micheng          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		= so_long
 CC			= gcc
-FLAGS		= -Wall -Werror -Wextra -g3 -fsanitize=address
+FLAGS		= -g3 -fsanitize=address
 MLX 		= -lmlx -framework OpenGL -framework AppKit
 INCLUDES 	= -Iincludes -Ilibft
 RM			= rm -rf

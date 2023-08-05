@@ -6,7 +6,7 @@
 /*   By: micheng <micheng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 01:02:52 by micheng           #+#    #+#             */
-/*   Updated: 2023/08/05 08:17:36 by micheng          ###   ########.fr       */
+/*   Updated: 2023/08/05 11:03:26 by micheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,12 @@ static void	enemy_animation_state(t_vars *vars,
 static void	move_enemy(t_vars *vars,
 	t_parent *current_parent, t_parent *next_parent)
 {
+	if (vars->map[next_parent->parent_y][next_parent->parent_x] == 'T')
+	{
+		vars->enemy_trapped = 1;
+		vars->enemy_trapped_count = 5;
+		return ;
+	}
 	vars->map[current_parent->parent_y][current_parent->parent_x] = '0';
 	vars->map[next_parent->parent_y][next_parent->parent_x] = 'X';
 	vars->pos.x_en = next_parent->parent_x;
@@ -92,7 +98,9 @@ void	enemy_path(t_vars *vars)
 		vars->pos.x_en = current_parent->parent_x;
 		vars->pos.y_en = current_parent->parent_y;
 		if (vars->play_dead == 1 && next_parent != NULL
-			&& is_not_visited(vars, next_parent))
+			&& is_not_visited(vars, next_parent)
+			|| vars->map[next_parent->parent_y]
+			[next_parent->parent_x] == 'T')
 		{
 			move_enemy(vars, current_parent, next_parent);
 			return ;

@@ -6,7 +6,7 @@
 /*   By: micheng <micheng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 08:22:51 by micheng           #+#    #+#             */
-/*   Updated: 2023/08/04 06:32:18 by micheng          ###   ########.fr       */
+/*   Updated: 2023/08/05 10:33:21 by micheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,14 @@ void	collectible_animation(t_vars *vars)
 		vars->sprites.collectible_1 = vars->animations.collectible_3;
 	else if (vars->sprites.collectible_1 == vars->animations.collectible_3)
 		vars->sprites.collectible_1 = vars->animations.collectible_1;
+	if (vars->sprites.trap_1 == vars->animations.trap_1)
+		vars->sprites.trap_1 = vars->animations.trap_2;
+	else if (vars->sprites.trap_1 == vars->animations.trap_2)
+		vars->sprites.trap_1 = vars->animations.trap_3;
+	else if (vars->sprites.trap_1 == vars->animations.trap_3)
+		vars->sprites.trap_1 = vars->animations.trap_4;
+	else if (vars->sprites.trap_1 == vars->animations.trap_4)
+		vars->sprites.trap_1 = vars->animations.trap_1;
 }
 
 void	player_animation_left_right(t_vars *vars)

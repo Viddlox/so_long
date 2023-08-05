@@ -6,7 +6,7 @@
 /*   By: micheng <micheng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 05:02:10 by micheng           #+#    #+#             */
-/*   Updated: 2023/08/05 08:56:30 by micheng          ###   ########.fr       */
+/*   Updated: 2023/08/05 10:48:05 by micheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void	init_sprites(t_vars *vars)
 	vars->sprites.player_1 = vars->animations.player_idle;
 	vars->sprites.collectible_1 = vars->animations.collectible_1;
 	vars->sprites.enemy_1 = vars->animations.enemy_idle;
+	vars->sprites.trap_1 = vars->animations.trap_1;
 }
 
 void	set_sprites(t_vars *vars, int x, int y)
@@ -65,6 +66,9 @@ void	set_sprites(t_vars *vars, int x, int y)
 	else if (vars->map[y][x] == 'D')
 		mlx_put_image_to_window(vars->render.mlx,
 			vars->render.win, vars->sprites.player_dead, x * 32, y * 32);
+	else if (vars->map[y][x] == 'T')
+		mlx_put_image_to_window(vars->render.mlx,
+			vars->render.win, vars->sprites.trap_1, x * 32, y * 32);
 }
 
 void	render_sprites(t_vars *vars)

@@ -6,7 +6,7 @@
 /*   By: micheng <micheng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 03:58:30 by micheng           #+#    #+#             */
-/*   Updated: 2023/08/04 06:08:29 by micheng          ###   ########.fr       */
+/*   Updated: 2023/08/05 10:28:48 by micheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,14 @@ void	collectibles_anim_init(t_vars *vars)
 			"assets/collectible_2.xpm", &x, &y);
 	vars->animations.collectible_3 = mlx_xpm_file_to_image(vars->render.mlx,
 			"assets/collectible_3.xpm", &x, &y);
+	vars->animations.trap_1 = mlx_xpm_file_to_image(vars->render.mlx,
+			"assets/trap_1.xpm", &x, &y);
+	vars->animations.trap_2 = mlx_xpm_file_to_image(vars->render.mlx,
+			"assets/trap_2.xpm", &x, &y);
+	vars->animations.trap_3 = mlx_xpm_file_to_image(vars->render.mlx,
+			"assets/trap_3.xpm", &x, &y);
+	vars->animations.trap_4 = mlx_xpm_file_to_image(vars->render.mlx,
+			"assets/trap_4.xpm", &x, &y);
 }
 
 void	player_anim_init_1(t_vars *vars)
@@ -99,4 +107,8 @@ void	enemy_anim_init_2(t_vars *vars)
 			"assets/enemy_up_2.xpm", &x, &y);
 	vars->animations.enemy_up_3 = mlx_xpm_file_to_image(vars->render.mlx,
 			"assets/enemy_up_3.xpm", &x, &y);
+	vars->animations.enemy_trapped_1 = mlx_xpm_file_to_image(vars->render.mlx,
+			"assets/enemy_trapped_1.xpm", &x, &y);
+	vars->animations.enemy_trapped_2 = mlx_xpm_file_to_image(vars->render.mlx,
+			"assets/enemy_trapped_2.xpm", &x, &y);
 }

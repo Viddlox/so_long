@@ -6,7 +6,7 @@
 /*   By: micheng <micheng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 14:35:05 by micheng           #+#    #+#             */
-/*   Updated: 2023/08/05 09:44:58 by micheng          ###   ########.fr       */
+/*   Updated: 2023/08/05 10:50:18 by micheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,7 @@ typedef struct s_sprites
 	void	*floors;
 	void	*walls;
 	void	*player_dead;
+	void	*trap_1;
 }	t_sprites;
 
 typedef enum s_player_anim_state
@@ -151,6 +152,8 @@ typedef struct s_animations
 	void	*enemy_up_1;
 	void	*enemy_up_2;
 	void	*enemy_up_3;
+	void	*enemy_trapped_1;
+	void	*enemy_trapped_2;
 
 	void	*collectible_1;
 	void	*collectible_2;
@@ -158,6 +161,11 @@ typedef struct s_animations
 
 	void	*enemy_teleport_1;
 	void	*enemy_teleport_2;
+
+	void	*trap_1;
+	void	*trap_2;
+	void	*trap_3;
+	void	*trap_4;
 }	t_animations;
 
 //main variables for the game
@@ -168,11 +176,13 @@ typedef struct s_vars
 	int					c_count;
 	int					en_count;
 	int					ext_count;
+	int					trap_count;
 	char				**map;
 	int					map_h;
 	int					map_l;
 	int					play_dead;
 	int					enemy_trapped;
+	int					enemy_trapped_count;
 	t_pos_data			*head_pos;
 	t_queue_data		*head_queue;
 	t_parent_data		*head_parent;

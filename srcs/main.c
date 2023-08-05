@@ -6,7 +6,7 @@
 /*   By: micheng <micheng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 14:50:25 by micheng           #+#    #+#             */
-/*   Updated: 2023/08/05 08:13:33 by micheng          ###   ########.fr       */
+/*   Updated: 2023/08/05 10:36:18 by micheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,13 @@ int	keypress(int code, t_vars *vars)
 		vars->play_dead = 1;
 		vars->map[vars->pos.y][vars->pos.x] = 'D';
 	}
+	else if (code == 7)
+	{
+		if (vars->pos.x - 1 <= vars->map_l
+			&& vars->pos.x - 1 > 0 && vars->trap_count > 0)
+			vars->map[vars->pos.y][vars->pos.x - 1] = 'T';
+		vars->trap_count--;
+	}
 	else if (code == 53)
 		dest_win(vars);
 	ft_printf ("Walked %i steps.\n", vars->game.steps);
@@ -61,8 +68,9 @@ int	main(int ac, char **av)
 	t_vars			vars;
 
 	vars.animations.frame_count = 0;
-	vars.animations.en_speed = 0;
 	vars.play_dead = 0;
+	vars.trap_count = 3;
+	vars.enemy_trapped = 0;
 	if (check_file(ac, av, &vars) && ac == 2)
 	{
 		vars.game.steps = 0;
