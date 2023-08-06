@@ -6,11 +6,37 @@
 /*   By: micheng <micheng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 05:32:52 by micheng           #+#    #+#             */
-/*   Updated: 2023/08/06 10:49:00 by micheng          ###   ########.fr       */
+/*   Updated: 2023/08/06 22:45:51 by micheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+void	find_dummies(t_vars *vars)
+{
+	int	x;
+	int	y;
+	int	dummy_count;
+
+	y = 0;
+	dummy_count = 0;
+	while (vars->map[y])
+	{
+		x = 0;
+		while (vars->map[y][x])
+		{
+			if (vars->map[y][x] == 'Z'
+				&& dummy_count <= vars->en_count)
+			{
+				vars->map[y][x] = 'X';
+				dummy_count++;
+			}
+			++x;
+		}
+		++y;
+	}
+	render_sprites(vars);
+}
 
 static void	check_step(int cur_x, int cur_y,
 	int *next_x, int *next_y, t_vars *vars)
@@ -48,27 +74,6 @@ void	find_enemies(t_pos **head, t_vars *vars, int cur_y, int cur_x)
 	}
 	check_step(cur_x, cur_y, &cur_x, &cur_y, vars);
 	find_enemies(head, vars, cur_y, cur_x);
-}
-
-void	find_dummies(t_vars *vars)
-{
-	int	x;
-	int	y;
-
-	y = 0;
-	while (vars->map[y++])
-	{
-		x = 0;
-		while (vars->map[y][x++])
-		{
-			if (vars->map[y][x] == 'Z')
-			{
-				vars->map[y][x] = 'X';
-				render_sprites(vars);
-				return ;
-			}
-		}
-	}
 }
 
 void	init_enemy(t_vars *vars)

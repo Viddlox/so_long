@@ -6,7 +6,7 @@
 /*   By: micheng <micheng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 14:35:05 by micheng           #+#    #+#             */
-/*   Updated: 2023/08/06 11:50:29 by micheng          ###   ########.fr       */
+/*   Updated: 2023/08/06 22:43:20 by micheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,6 @@ typedef struct s_pos
 
 typedef struct s_trap
 {
-	int				x;
-	int				y;
 	int				enemy_trapped;
 	int				enemy_trapped_count;
 	struct s_trap	*next;
