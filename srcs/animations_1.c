@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   animations.c                                       :+:      :+:    :+:   */
+/*   animations_1.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: micheng <micheng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 08:22:51 by micheng           #+#    #+#             */
-/*   Updated: 2023/08/06 08:18:41 by micheng          ###   ########.fr       */
+/*   Updated: 2023/08/06 11:49:08 by micheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,18 +20,6 @@ void	collectible_animation(t_vars *vars)
 		vars->sprites.collectible_1 = vars->animations.collectible_3;
 	else if (vars->sprites.collectible_1 == vars->animations.collectible_3)
 		vars->sprites.collectible_1 = vars->animations.collectible_1;
-	if (vars->sprites.trap_1 == vars->animations.trap_1)
-		vars->sprites.trap_1 = vars->animations.trap_2;
-	else if (vars->sprites.trap_1 == vars->animations.trap_2)
-		vars->sprites.trap_1 = vars->animations.trap_3;
-	else if (vars->sprites.trap_1 == vars->animations.trap_3)
-		vars->sprites.trap_1 = vars->animations.trap_4;
-	else if (vars->sprites.trap_1 == vars->animations.trap_4)
-		vars->sprites.trap_1 = vars->animations.trap_1;
-	if (vars->sprites.enemy_dummy_1 == vars->animations.enemy_trapped_1)
-		vars->sprites.enemy_dummy_1 = vars->animations.enemy_trapped_2;
-	else if (vars->sprites.enemy_dummy_1 == vars->animations.enemy_trapped_2)
-		vars->sprites.enemy_dummy_1 = vars->animations.enemy_trapped_1;
 }
 
 void	player_animation_left_right(t_vars *vars)
@@ -119,5 +107,9 @@ void	enemy_animation_left_right(t_vars *vars)
 		else if (vars->sprites.enemy_1 == vars->animations.enemy_right_3)
 			vars->sprites.enemy_1 = vars->animations.enemy_idle;
 	}
+	if (vars->sprites.enemy_dummy_1 == vars->animations.enemy_trapped_1)
+		vars->sprites.enemy_dummy_1 = vars->animations.enemy_trapped_2;
+	else if (vars->sprites.enemy_dummy_1 == vars->animations.enemy_trapped_2)
+		vars->sprites.enemy_dummy_1 = vars->animations.enemy_trapped_1;
 	return ;
 }

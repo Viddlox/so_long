@@ -6,7 +6,7 @@
 /*   By: micheng <micheng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 16:24:52 by micheng           #+#    #+#             */
-/*   Updated: 2023/08/05 10:04:09 by micheng          ###   ########.fr       */
+/*   Updated: 2023/08/06 11:33:23 by micheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static void	item_update(t_vars *vars, char c)
 		vars->e_count++;
 	else if (c == 'X')
 		vars->en_count++;
-	else if (c == '1' || c == '0')
+	else if (c == '1' || c == '0' || c == 'B')
 		return ;
 	else
 		vars->ext_count++;

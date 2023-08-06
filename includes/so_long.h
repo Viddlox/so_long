@@ -6,7 +6,7 @@
 /*   By: micheng <micheng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 14:35:05 by micheng           #+#    #+#             */
-/*   Updated: 2023/08/06 10:46:27 by micheng          ###   ########.fr       */
+/*   Updated: 2023/08/06 11:50:29 by micheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,7 @@ typedef struct s_sprites
 	void	*enemy_1;
 	void	*collectible_1;
 	void	*enemy_dummy_1;
+	void	*bomb_1;
 	void	*exit;
 	void	*exit_unlocked;
 	void	*floors;
@@ -184,6 +185,11 @@ typedef struct s_animations
 	void	*trap_2;
 	void	*trap_3;
 	void	*trap_4;
+
+	void	*bomb_1;
+	void	*bomb_2;
+	void	*bomb_3;
+	void	*bomb_4;
 }	t_animations;
 
 //main variables for the game
@@ -222,11 +228,15 @@ void	player_anim_init_1(t_vars *vars);
 void	player_anim_init_2(t_vars *vars);
 void	enemy_anim_init_1(t_vars *vars);
 void	enemy_anim_init_2(t_vars *vars);
+void	trap_anim_init(t_vars *vars);
+void	bomb_anim_init(t_vars *vars);
 void	player_animation_up_down(t_vars *vars);
 void	player_animation_left_right(t_vars *vars);
 void	collectible_animation(t_vars *vars);
 void	enemy_animation_up_down(t_vars *vars);
 void	enemy_animation_left_right(t_vars *vars);
+void	bomb_animation(t_vars *vars);
+void	trap_animation(t_vars *vars);
 
 //map validation functions
 int		check_file(int ac, char **av, t_vars *vars);

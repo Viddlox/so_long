@@ -6,7 +6,7 @@
 /*   By: micheng <micheng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 03:58:30 by micheng           #+#    #+#             */
-/*   Updated: 2023/08/06 08:04:38 by micheng          ###   ########.fr       */
+/*   Updated: 2023/08/06 11:44:49 by micheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,6 @@ void	collectibles_anim_init(t_vars *vars)
 			"assets/collectible_2.xpm", &x, &y);
 	vars->animations.collectible_3 = mlx_xpm_file_to_image(vars->render.mlx,
 			"assets/collectible_3.xpm", &x, &y);
-	vars->animations.trap_1 = mlx_xpm_file_to_image(vars->render.mlx,
-			"assets/trap_1.xpm", &x, &y);
-	vars->animations.trap_2 = mlx_xpm_file_to_image(vars->render.mlx,
-			"assets/trap_2.xpm", &x, &y);
-	vars->animations.trap_3 = mlx_xpm_file_to_image(vars->render.mlx,
-			"assets/trap_3.xpm", &x, &y);
-	vars->animations.trap_4 = mlx_xpm_file_to_image(vars->render.mlx,
-			"assets/trap_4.xpm", &x, &y);
 }
 
 void	player_anim_init_1(t_vars *vars)
