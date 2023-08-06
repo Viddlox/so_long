@@ -6,7 +6,7 @@
 /*   By: micheng <micheng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 14:35:05 by micheng           #+#    #+#             */
-/*   Updated: 2023/08/06 09:08:28 by micheng          ###   ########.fr       */
+/*   Updated: 2023/08/06 09:33:57 by micheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -266,7 +266,6 @@ int		y_vectors(int y, int i);
 int		is_obstacle(char c);
 void	enemy_path(t_vars *vars);
 int		manhattan_distance(t_vars *vars, int x, int y);
-void	add_trapped_node(t_parent *data, t_vars *vars);
 
 //linked list utils
 int		get_queue_size(t_queue_data *head);
@@ -275,14 +274,11 @@ void	init_parent_list(t_parent_data **data, t_vars *vars);
 void	init_queue_list(t_queue_data **data, t_vars *vars);
 void	init_pos_list(t_pos_data **data, t_vars *vars);
 void	init_tracker_list(t_tracker_data **data, t_vars *vars);
-void	init_trapped_list(t_trap_data **data, t_vars *vars);
 void	ft_clear_parent_data(t_parent_data **data);
 void	ft_clear_pos_data(t_pos_data **data);
 void	ft_clear_queue_data(t_queue_data **data);
-void	ft_clear_trapped_data(t_trap_data **data);
 void	ft_clear_tracked_data(t_tracker_data **data);
 void	clear_tracker_nodes(t_vars *vars);
-void	clear_trapped_nodes(t_vars *vars);
 void	free_lists(t_vars *vars);
 
 //gnl utils
