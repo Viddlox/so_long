@@ -6,11 +6,40 @@
 /*   By: micheng <micheng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 00:07:57 by micheng           #+#    #+#             */
-/*   Updated: 2023/08/05 10:15:44 by micheng          ###   ########.fr       */
+/*   Updated: 2023/08/06 09:21:58 by micheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+void	place_trap(t_vars *vars, int code)
+{
+	if (code == 126)
+	{
+		if (!is_obstacle(vars->map[vars->pos.y - 1][vars->pos.x])
+			&& vars->trap_count > 0)
+			vars->map[vars->pos.y - 1][vars->pos.x] = 'T';
+	}
+	else if (code == 123)
+	{
+		if (!is_obstacle(vars->map[vars->pos.y][vars->pos.x - 1])
+			&& vars->trap_count > 0)
+			vars->map[vars->pos.y][vars->pos.x - 1] = 'T';
+	}
+	else if (code == 125)
+	{
+		if (!is_obstacle(vars->map[vars->pos.y + 1][vars->pos.x])
+			&& vars->trap_count > 0)
+			vars->map[vars->pos.y + 1][vars->pos.x] = 'T';
+	}
+	else if (code == 124)
+	{
+		if (!is_obstacle(vars->map[vars->pos.y][vars->pos.x + 1])
+			&& vars->trap_count > 0)
+			vars->map[vars->pos.y][vars->pos.x + 1] = 'T';
+	}
+	vars->trap_count--;
+}
 
 int	move_up(t_vars *vars)
 {
@@ -18,7 +47,8 @@ int	move_up(t_vars *vars)
 	if (vars->map[vars->pos.y - 1][vars->pos.x] == '1'
 		|| vars->map[vars->pos.y - 1][vars->pos.x] == 'T')
 		return (0);
-	if (vars->map[vars->pos.y - 1][vars->pos.x] == 'X')
+	if (vars->map[vars->pos.y - 1][vars->pos.x] == 'X'
+		|| vars->map[vars->pos.y - 1][vars->pos.x] == 'Z')
 		print_lose(vars->map, vars);
 	if (vars->map[vars->pos.y - 1][vars->pos.x] == 'C')
 		vars->c_count--;
@@ -44,7 +74,8 @@ int	move_down(t_vars *vars)
 	if (vars->map[vars->pos.y + 1][vars->pos.x] == '1'
 		|| vars->map[vars->pos.y + 1][vars->pos.x] == 'T')
 		return (0);
-	if (vars->map[vars->pos.y + 1][vars->pos.x] == 'X')
+	if (vars->map[vars->pos.y + 1][vars->pos.x] == 'X'
+		|| vars->map[vars->pos.y + 1][vars->pos.x] == 'Z')
 		print_lose(vars->map, vars);
 	if (vars->map[vars->pos.y + 1][vars->pos.x] == 'C')
 		vars->c_count--;
@@ -70,7 +101,8 @@ int	move_right(t_vars *vars)
 	if (vars->map[vars->pos.y][vars->pos.x + 1] == '1'
 		|| vars->map[vars->pos.y][vars->pos.x + 1] == 'T')
 		return (0);
-	if (vars->map[vars->pos.y][vars->pos.x + 1] == 'X')
+	if (vars->map[vars->pos.y][vars->pos.x + 1] == 'X'
+		|| vars->map[vars->pos.y][vars->pos.x + 1] == 'Z')
 		print_lose(vars->map, vars);
 	if (vars->map[vars->pos.y][vars->pos.x + 1] == 'C')
 		vars->c_count--;
@@ -96,7 +128,8 @@ int	move_left(t_vars *vars)
 	if (vars->map[vars->pos.y][vars->pos.x - 1] == '1'
 		|| vars->map[vars->pos.y][vars->pos.x - 1] == 'T')
 		return (0);
-	if (vars->map[vars->pos.y][vars->pos.x - 1] == 'X')
+	if (vars->map[vars->pos.y][vars->pos.x - 1] == 'X'
+		|| vars->map[vars->pos.y][vars->pos.x - 1] == 'Z')
 		print_lose(vars->map, vars);
 	if (vars->map[vars->pos.y][vars->pos.x - 1] == 'C')
 		vars->c_count--;

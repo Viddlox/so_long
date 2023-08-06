@@ -6,7 +6,7 @@
 /*   By: micheng <micheng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 01:02:52 by micheng           #+#    #+#             */
-/*   Updated: 2023/08/06 03:57:29 by micheng          ###   ########.fr       */
+/*   Updated: 2023/08/06 09:03:48 by micheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,9 +73,13 @@ static void	enemy_animation_state(t_vars *vars,
 static void	move_enemy(t_vars *vars,
 	t_parent *current_parent, t_parent *next_parent)
 {
-	if (vars->map[next_parent->parent_y][next_parent->parent_x] == 'T')
+	if (vars->map[next_parent->parent_y][next_parent->parent_x] == 'T'
+		|| vars->map[current_parent->parent_y]
+			[current_parent->parent_x] == 'T' )
 	{
-		enemy_trap_mechanics(vars, current_parent, next_parent);
+		vars->map[current_parent->parent_y][current_parent->parent_x] = '0';
+		vars->map[next_parent->parent_y][next_parent->parent_x] = 'Z';
+		add_trapped_node(next_parent, vars);
 		return ;
 	}
 	vars->map[current_parent->parent_y][current_parent->parent_x] = '0';
@@ -99,7 +103,9 @@ void	enemy_path(t_vars *vars)
 		if (vars->play_dead == 1 && next_parent != NULL
 			&& (is_not_visited(vars, next_parent)
 				|| vars->map[next_parent->parent_y]
-				[next_parent->parent_x] == 'T'))
+				[next_parent->parent_x] == 'T'
+				|| vars->map[current_parent->parent_y]
+				[current_parent->parent_x] == 'T'))
 		{
 			move_enemy(vars, current_parent, next_parent);
 			return ;

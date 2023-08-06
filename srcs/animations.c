@@ -6,7 +6,7 @@
 /*   By: micheng <micheng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 08:22:51 by micheng           #+#    #+#             */
-/*   Updated: 2023/08/05 10:33:21 by micheng          ###   ########.fr       */
+/*   Updated: 2023/08/06 08:18:41 by micheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,10 @@ void	collectible_animation(t_vars *vars)
 		vars->sprites.trap_1 = vars->animations.trap_4;
 	else if (vars->sprites.trap_1 == vars->animations.trap_4)
 		vars->sprites.trap_1 = vars->animations.trap_1;
+	if (vars->sprites.enemy_dummy_1 == vars->animations.enemy_trapped_1)
+		vars->sprites.enemy_dummy_1 = vars->animations.enemy_trapped_2;
+	else if (vars->sprites.enemy_dummy_1 == vars->animations.enemy_trapped_2)
+		vars->sprites.enemy_dummy_1 = vars->animations.enemy_trapped_1;
 }
 
 void	player_animation_left_right(t_vars *vars)
