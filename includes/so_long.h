@@ -6,7 +6,7 @@
 /*   By: micheng <micheng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 14:35:05 by micheng           #+#    #+#             */
-/*   Updated: 2023/08/06 22:43:20 by micheng          ###   ########.fr       */
+/*   Updated: 2023/08/07 02:24:16 by micheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,10 +93,17 @@ typedef struct s_pos_data
 	t_pos	*head;
 }	t_pos_data;
 
-//In-game variables
+//In-game variables and icons
 typedef struct s_game
 {
-	int	steps;
+	int		steps;
+	void	*step_img;
+	int		step_img_width;
+	int		step_img_height;
+	char	*step_img_data;
+
+	void	*trap_img;
+	void	*bomb_img;
 }	t_game;
 
 //mlx rendering
@@ -236,6 +243,10 @@ void	enemy_animation_left_right(t_vars *vars);
 void	bomb_animation(t_vars *vars);
 void	trap_animation(t_vars *vars);
 
+//icons
+void	init_icons(t_vars *vars);
+
+
 //map validation functions
 int		check_file(int ac, char **av, t_vars *vars);
 int		check_map(t_vars *vars);
@@ -254,6 +265,9 @@ void	place_trap(t_vars *vars, int code);
 //event functions
 void	print_win(char **map, t_vars *vars);
 void	print_lose(char **map, t_vars *vars);
+void	print_steps(t_vars *vars);
+void	print_trap_count(t_vars *vars);
+void	print_bomb_timer(t_vars *vars);
 
 //rendering/mlx functions
 int		keypress(int code, t_vars *vars);

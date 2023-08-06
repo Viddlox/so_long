@@ -6,7 +6,7 @@
 /*   By: micheng <micheng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 14:50:25 by micheng           #+#    #+#             */
-/*   Updated: 2023/08/06 10:57:29 by micheng          ###   ########.fr       */
+/*   Updated: 2023/08/07 01:37:47 by micheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ int	dest_win(t_vars *vars)
 	if (vars->en_count > 0)
 		free_lists(vars);
 	ft_clear_tracked_data(&vars->head_tracker);
+	mlx_destroy_image(vars->render.mlx, vars->game.step_img);
 	exit(0);
 }
 
@@ -84,6 +85,7 @@ int	main(int ac, char **av)
 		vars.render.win = mlx_new_window(vars.render.mlx,
 				vars.map_l * 32, vars.map_h * 32, "so_long");
 		init_sprites(&vars);
+		init_icons(&vars);
 		render_sprites(&vars);
 		init_tracker_list(&vars.head_tracker, &vars);
 		mlx_hook(vars.render.win, 2, (1L << 0), keypress, &vars);
@@ -94,7 +96,5 @@ int	main(int ac, char **av)
 	}
 	else
 		ft_printf("Error: Map is invalid or not found.\n");
-	free_lists(&vars);
-	ft_clear_tracked_data(&vars.head_tracker);
 	return (0);
 }

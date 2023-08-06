@@ -6,7 +6,7 @@
 /*   By: micheng <micheng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 05:02:10 by micheng           #+#    #+#             */
-/*   Updated: 2023/08/06 13:02:37 by micheng          ###   ########.fr       */
+/*   Updated: 2023/08/07 02:37:39 by micheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,12 @@ void	set_sprites(t_vars *vars, int x, int y)
 	else if (vars->map[y][x] == 'B')
 		mlx_put_image_to_window(vars->render.mlx,
 			vars->render.win, vars->sprites.bomb_1, x * 32, y * 32);
+	mlx_put_image_to_window(vars->render.mlx,
+		vars->render.win, vars->game.step_img, 10, 10);
+	mlx_put_image_to_window(vars->render.mlx,
+		vars->render.win, vars->game.trap_img, 10, 45);
+	mlx_put_image_to_window(vars->render.mlx,
+		vars->render.win, vars->game.bomb_img, 1, 60);
 }
 
 void	render_sprites(t_vars *vars)
@@ -97,6 +103,8 @@ void	render_sprites(t_vars *vars)
 		}
 		y++;
 	}
+	print_steps(vars);
+	print_trap_count(vars);
 }
 
 int	animation(t_vars *vars)
