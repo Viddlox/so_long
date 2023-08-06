@@ -6,7 +6,7 @@
 /*   By: micheng <micheng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 05:02:10 by micheng           #+#    #+#             */
-/*   Updated: 2023/08/06 08:08:27 by micheng          ###   ########.fr       */
+/*   Updated: 2023/08/06 10:54:25 by micheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,15 @@ int	animation(t_vars *vars)
 	vars->animations.frame_count++;
 	if (vars->animations.frame_count >= 2000)
 	{
+		if (vars->trap_flag == 1)
+		{
+			vars->trap_counter--;
+			if (vars->trap_counter <= 0)
+			{
+				find_dummies(vars);
+				vars->trap_flag = 0;
+			}
+		}
 		mlx_clear_window(vars->render.mlx, vars->render.win);
 		collectible_animation(vars);
 		player_animation_left_right(vars);

@@ -6,7 +6,7 @@
 /*   By: micheng <micheng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 14:50:25 by micheng           #+#    #+#             */
-/*   Updated: 2023/08/06 09:33:28 by micheng          ###   ########.fr       */
+/*   Updated: 2023/08/06 10:51:14 by micheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,16 @@ void	free_map(char **map, t_vars *vars)
 	while (++i < vars->map_h)
 		free(map[i]);
 	free(map);
+}
+
+void	free_lists(t_vars *vars)
+{
+	ft_clear_pos_data(&vars->head_pos);
+	ft_clear_queue_data(&vars->head_queue);
+	ft_clear_parent_data(&vars->head_parent);
+	vars->head_pos = NULL;
+	vars->head_queue = NULL;
+	vars->head_parent = NULL;
 }
 
 int	dest_win(t_vars *vars)
@@ -66,6 +76,7 @@ int	main(int ac, char **av)
 	vars.animations.frame_count = 0;
 	vars.play_dead = 0;
 	vars.trap_count = 3;
+	vars.trap_flag = 0;
 	if (check_file(ac, av, &vars) && ac == 2)
 	{
 		vars.game.steps = 0;
@@ -79,7 +90,7 @@ int	main(int ac, char **av)
 		mlx_hook(vars.render.win, 17, 0L, dest_win, &vars);
 		mlx_loop_hook(vars.render.mlx, animation, &vars);
 		mlx_loop(vars.render.mlx);
-		system("leaks -q so_long");
+		// system("leaks -q so_long");
 	}
 	else
 		ft_printf("Error: Map is invalid or not found.\n");

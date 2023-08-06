@@ -6,7 +6,7 @@
 /*   By: micheng <micheng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 05:32:52 by micheng           #+#    #+#             */
-/*   Updated: 2023/08/06 09:31:42 by micheng          ###   ########.fr       */
+/*   Updated: 2023/08/06 10:49:00 by micheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,25 +50,24 @@ void	find_enemies(t_pos **head, t_vars *vars, int cur_y, int cur_x)
 	find_enemies(head, vars, cur_y, cur_x);
 }
 
-static	void	add_tracked_node(t_pos *data, t_vars *vars)
+void	find_dummies(t_vars *vars)
 {
-	t_tracker	*current;
-	t_tracker	*temp;
+	int	x;
+	int	y;
 
-	current = malloc(sizeof(t_tracker));
-	if (!current)
-		return ;
-	current->x = data->x_en;
-	current->y = data->y_en;
-	current->next = NULL;
-	if (vars->head_tracker->head == NULL)
-		vars->head_tracker->head = current;
-	else
+	y = 0;
+	while (vars->map[y++])
 	{
-		temp = vars->head_tracker->head;
-		while (temp->next != NULL)
-			temp = temp->next;
-		temp->next = current;
+		x = 0;
+		while (vars->map[y][x++])
+		{
+			if (vars->map[y][x] == 'Z')
+			{
+				vars->map[y][x] = 'X';
+				render_sprites(vars);
+				return ;
+			}
+		}
 	}
 }
 

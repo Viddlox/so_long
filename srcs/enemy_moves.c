@@ -6,7 +6,7 @@
 /*   By: micheng <micheng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 01:02:52 by micheng           #+#    #+#             */
-/*   Updated: 2023/08/06 09:03:48 by micheng          ###   ########.fr       */
+/*   Updated: 2023/08/06 10:54:57 by micheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,9 +77,10 @@ static void	move_enemy(t_vars *vars,
 		|| vars->map[current_parent->parent_y]
 			[current_parent->parent_x] == 'T' )
 	{
+		vars->trap_flag = 1;
+		vars->trap_counter = 10;
 		vars->map[current_parent->parent_y][current_parent->parent_x] = '0';
 		vars->map[next_parent->parent_y][next_parent->parent_x] = 'Z';
-		add_trapped_node(next_parent, vars);
 		return ;
 	}
 	vars->map[current_parent->parent_y][current_parent->parent_x] = '0';

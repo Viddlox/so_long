@@ -6,7 +6,7 @@
 /*   By: micheng <micheng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 14:35:05 by micheng           #+#    #+#             */
-/*   Updated: 2023/08/06 09:33:57 by micheng          ###   ########.fr       */
+/*   Updated: 2023/08/06 10:46:27 by micheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -199,6 +199,8 @@ typedef struct s_vars
 	int					map_h;
 	int					map_l;
 	int					play_dead;
+	int					trap_counter;
+	int					trap_flag;
 	t_pos_data			*head_pos;
 	t_queue_data		*head_queue;
 	t_parent_data		*head_parent;
@@ -244,9 +246,6 @@ void	place_trap(t_vars *vars, int code);
 //event functions
 void	print_win(char **map, t_vars *vars);
 void	print_lose(char **map, t_vars *vars);
-void	print_parent_list(t_parent *head);
-void	print_tracker_list(t_tracker *head_tracker);
-void	print_enemy_coordinates(t_pos *head);
 
 //rendering/mlx functions
 int		keypress(int code, t_vars *vars);
@@ -266,6 +265,7 @@ int		y_vectors(int y, int i);
 int		is_obstacle(char c);
 void	enemy_path(t_vars *vars);
 int		manhattan_distance(t_vars *vars, int x, int y);
+void	find_dummies(t_vars *vars);
 
 //linked list utils
 int		get_queue_size(t_queue_data *head);
@@ -274,6 +274,7 @@ void	init_parent_list(t_parent_data **data, t_vars *vars);
 void	init_queue_list(t_queue_data **data, t_vars *vars);
 void	init_pos_list(t_pos_data **data, t_vars *vars);
 void	init_tracker_list(t_tracker_data **data, t_vars *vars);
+void	add_tracked_node(t_pos *data, t_vars *vars);
 void	ft_clear_parent_data(t_parent_data **data);
 void	ft_clear_pos_data(t_pos_data **data);
 void	ft_clear_queue_data(t_queue_data **data);
