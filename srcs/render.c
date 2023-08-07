@@ -6,7 +6,7 @@
 /*   By: micheng <micheng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 05:02:10 by micheng           #+#    #+#             */
-/*   Updated: 2023/08/07 11:06:16 by micheng          ###   ########.fr       */
+/*   Updated: 2023/08/07 12:17:51 by micheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ void	render_sprites(t_vars *vars)
 int	animation(t_vars *vars)
 {
 	vars->animations.frame_count++;
+	vars->time_taken++;
 	time_bomb_handler(vars);
 	if (vars->animations.frame_count >= 2000)
 	{

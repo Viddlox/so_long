@@ -6,7 +6,7 @@
 /*   By: micheng <micheng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 14:52:44 by micheng           #+#    #+#             */
-/*   Updated: 2023/08/07 10:55:36 by micheng          ###   ########.fr       */
+/*   Updated: 2023/08/07 12:21:48 by micheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 void	print_win(char **map, t_vars *vars)
 {
-	ft_putstr_fd("You win!", 1);
+	ft_putstr_fd("You win!\n", 1);
+	ft_printf("Time taken: %d seconds\n", vars->time_taken/10000);
 	free_map(map, vars);
 	if (vars->en_count > 0)
 		free_lists(vars);

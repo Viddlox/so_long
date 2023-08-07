@@ -6,7 +6,7 @@
 /*   By: micheng <micheng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 14:35:05 by micheng           #+#    #+#             */
-/*   Updated: 2023/08/07 11:53:24 by micheng          ###   ########.fr       */
+/*   Updated: 2023/08/07 12:16:00 by micheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -256,6 +256,7 @@ typedef struct s_vars
 	int					k_count;
 	int					k_left_count;
 	int					invalid_count;
+	int					time_taken;
 	char				**map;
 	int					map_h;
 	int					map_l;
