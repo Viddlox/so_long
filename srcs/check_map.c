@@ -6,7 +6,7 @@
 /*   By: micheng <micheng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 16:24:52 by micheng           #+#    #+#             */
-/*   Updated: 2023/08/06 22:45:08 by micheng          ###   ########.fr       */
+/*   Updated: 2023/08/07 05:55:23 by micheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,15 @@ static void	item_update(t_vars *vars, char c)
 		vars->e_count++;
 	else if (c == 'X')
 		vars->en_count++;
-	else if (c == '1' || c == '0' || c == 'B')
+	else if (c == 'B')
+		vars->b_count++;
+	else if (c == 'K')
+	{
+		vars->k_count++;
+		vars->time_bomb.defuse_count++;
+	}
+	else if (c == '1' || c == '0')
 		return ;
-	else
-		vars->ext_count++;
 }
 
 int	check_entities(t_vars *vars)
@@ -67,10 +72,10 @@ int	check_entities(t_vars *vars)
 		while (vars->map[y][++x])
 			item_update(vars, vars->map[y][x]);
 	}
-	if (vars->ext_count > 0)
+	if (!(vars->c_count > 0 || vars->e_count == 1
+		|| vars->p_count == 1 || vars->b_count <= 1))
 		return (0);
-	else if (!(vars->c_count > 0 && vars->e_count == 1
-			&& vars->p_count == 1))
+	else if (vars->b_count >= 1 && vars->k_count < 1)
 		return (0);
 	return (1);
 }
@@ -81,7 +86,6 @@ int	check_map(t_vars *vars)
 	vars->e_count = 0;
 	vars->c_count = 0;
 	vars->en_count = 0;
-	vars->ext_count = 0;
 	if (!check_entities(vars))
 		return (0);
 	if (!check_walls(vars))

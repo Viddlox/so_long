@@ -6,7 +6,7 @@
 /*   By: micheng <micheng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 14:50:25 by micheng           #+#    #+#             */
-/*   Updated: 2023/08/07 01:37:47 by micheng          ###   ########.fr       */
+/*   Updated: 2023/08/07 06:40:26 by micheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,8 @@ int	keypress(int code, t_vars *vars)
 	}
 	else if (code == 126 || code == 123 || code == 124 || code == 125)
 		place_trap(vars, code);
+	// else if (code == 14)
+	// 	defuse_bomb(vars, code);
 	else if (code == 53)
 		dest_win(vars);
 	ft_printf ("Walked %i steps.\n", vars->game.steps);
@@ -74,13 +76,9 @@ int	main(int ac, char **av)
 {
 	t_vars			vars;
 
-	vars.animations.frame_count = 0;
-	vars.play_dead = 0;
-	vars.trap_count = 5;
-	vars.trap_flag = 0;
+	vars_init(&vars);
 	if (check_file(ac, av, &vars) && ac == 2)
 	{
-		vars.game.steps = 0;
 		vars.render.mlx = mlx_init();
 		vars.render.win = mlx_new_window(vars.render.mlx,
 				vars.map_l * 32, vars.map_h * 32, "so_long");

@@ -6,7 +6,7 @@
 /*   By: micheng <micheng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 05:02:10 by micheng           #+#    #+#             */
-/*   Updated: 2023/08/07 02:37:39 by micheng          ###   ########.fr       */
+/*   Updated: 2023/08/07 08:26:47 by micheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	set_animation_sprites(t_vars *vars)
 	player_anim_init_2(vars);
 	enemy_anim_init_1(vars);
 	enemy_anim_init_2(vars);
+	key_anim_init(vars);
 }
 
 void	init_sprites(t_vars *vars)
@@ -45,46 +46,8 @@ void	init_sprites(t_vars *vars)
 	vars->sprites.trap_1 = vars->animations.trap_1;
 	vars->sprites.enemy_dummy_1 = vars->animations.enemy_trapped_1;
 	vars->sprites.bomb_1 = vars->animations.bomb_1;
-}
-
-void	set_sprites(t_vars *vars, int x, int y)
-{
-	if (vars->map[y][x] == '1')
-		mlx_put_image_to_window(vars->render.mlx,vars->render.win,
-			vars->sprites.walls, x * 32, y * 32);
-	else if (vars->map[y][x] == '0')
-		mlx_put_image_to_window(vars->render.mlx,
-			vars->render.win, vars->sprites.floors, x * 32, y * 32);
-	else if (vars->map[y][x] == 'P')
-		mlx_put_image_to_window(vars->render.mlx,
-			vars->render.win, vars->sprites.player_1, x * 32, y * 32);
-	else if (vars->map[y][x] == 'C')
-		mlx_put_image_to_window(vars->render.mlx,
-			vars->render.win, vars->sprites.collectible_1, x * 32, y * 32);
-	else if (vars->map[y][x] == 'E')
-		mlx_put_image_to_window(vars->render.mlx,
-			vars->render.win, vars->sprites.exit, x * 32, y * 32);
-	else if (vars->map[y][x] == 'X')
-		mlx_put_image_to_window(vars->render.mlx,
-			vars->render.win, vars->sprites.enemy_1, x * 32, y * 32);
-	else if (vars->map[y][x] == 'D')
-		mlx_put_image_to_window(vars->render.mlx,
-			vars->render.win, vars->sprites.player_dead, x * 32, y * 32);
-	else if (vars->map[y][x] == 'T')
-		mlx_put_image_to_window(vars->render.mlx,
-			vars->render.win, vars->sprites.trap_1, x * 32, y * 32);
-	else if (vars->map[y][x] == 'Z')
-		mlx_put_image_to_window(vars->render.mlx,
-			vars->render.win, vars->sprites.enemy_dummy_1, x * 32, y * 32);
-	else if (vars->map[y][x] == 'B')
-		mlx_put_image_to_window(vars->render.mlx,
-			vars->render.win, vars->sprites.bomb_1, x * 32, y * 32);
-	mlx_put_image_to_window(vars->render.mlx,
-		vars->render.win, vars->game.step_img, 10, 10);
-	mlx_put_image_to_window(vars->render.mlx,
-		vars->render.win, vars->game.trap_img, 10, 45);
-	mlx_put_image_to_window(vars->render.mlx,
-		vars->render.win, vars->game.bomb_img, 1, 60);
+	vars->sprites.key_1 = vars->animations.key_1;
+	vars->sprites.use_key_1 = vars->animations.use_key_1;
 }
 
 void	render_sprites(t_vars *vars)
@@ -98,44 +61,35 @@ void	render_sprites(t_vars *vars)
 		x = 0;
 		while (vars->map[y][x])
 		{
-			set_sprites(vars, x, y);
+			set_basic_sprites(vars, x, y);
+			set_extra_sprites(vars, x, y);
 			x++;
 		}
 		y++;
 	}
-	print_steps(vars);
-	print_trap_count(vars);
+	print_icons(vars);
+	print_bomb_timer(vars);
+
 }
 
 int	animation(t_vars *vars)
 {
 	vars->animations.frame_count++;
+	if (vars->b_count == 1)
+		time_bomb_handler(vars);
 	if (vars->animations.frame_count >= 2000)
 	{
 		if (vars->trap_flag == 1)
-		{
-			vars->trap_counter--;
-			if (vars->trap_counter <= 0)
-			{
-				find_dummies(vars);
-				vars->trap_flag = 0;
-			}
-		}
+			activate_trap(vars);
 		mlx_clear_window(vars->render.mlx, vars->render.win);
 		collectible_animation(vars);
 		bomb_animation(vars);
 		trap_animation(vars);
+		key_animation(vars);
 		player_animation_left_right(vars);
 		player_animation_up_down(vars);
 		if (vars->en_count > 0)
-		{
-			init_pos_list(&vars->head_pos, vars);
-			init_parent_list(&vars->head_parent, vars);
-			init_enemy(vars);
-			enemy_animation_left_right(vars);
-			enemy_animation_up_down(vars);
-			free_lists(vars);
-		}
+			enemy_game_loop(vars);
 		vars->animations.frame_count = 0;
 		render_sprites(vars);
 	}

@@ -6,7 +6,7 @@
 /*   By: micheng <micheng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 14:35:05 by micheng           #+#    #+#             */
-/*   Updated: 2023/08/07 02:24:16 by micheng          ###   ########.fr       */
+/*   Updated: 2023/08/07 08:37:54 by micheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 
 # define BUFFER_SIZE 1024
 
+//Queue structure for BFS search
 typedef struct s_queue
 {
 	int				cur_x;
@@ -30,6 +31,7 @@ typedef struct s_queue
 	struct s_queue	*next;
 }	t_queue;
 
+//Extracted nodes from BFS search
 typedef struct s_parent
 {
 	int				parent_x;
@@ -53,6 +55,7 @@ typedef struct s_pos
 	struct s_pos	*next;
 }	t_pos;
 
+//Game trap mechanics
 typedef struct s_trap
 {
 	int				enemy_trapped;
@@ -60,11 +63,15 @@ typedef struct s_trap
 	struct s_trap	*next;
 }	t_trap;
 
-typedef struct s_trap_data
+//Time bomb mechanics
+typedef struct s_bomb
 {
-	t_trap	*head;
-}	t_trap_data;
+	int			timer;
+	int			bomb_flag;
+	int			defuse_count;
+}	t_bomb;
 
+//Tracker heuristic to optimize pathfinding
 typedef struct s_tracker
 {
 	int					x;
@@ -72,6 +79,11 @@ typedef struct s_tracker
 	struct s_tracker	*next;
 }	t_tracker;
 
+//pointers to the head of each linked list (because modularity?)
+typedef struct s_trap_data
+{
+	t_trap	*head;
+}	t_trap_data;
 
 typedef struct s_tracker_data
 {
@@ -98,12 +110,9 @@ typedef struct s_game
 {
 	int		steps;
 	void	*step_img;
-	int		step_img_width;
-	int		step_img_height;
-	char	*step_img_data;
-
 	void	*trap_img;
 	void	*bomb_img;
+	void	*key_img;
 }	t_game;
 
 //mlx rendering
@@ -127,8 +136,11 @@ typedef struct s_sprites
 	void	*walls;
 	void	*player_dead;
 	void	*trap_1;
+	void	*key_1;
+	void	*use_key_1;
 }	t_sprites;
 
+//player animation states
 typedef enum s_player_anim_state
 {
 	PLAYER_MOVE_LEFT,
@@ -137,6 +149,7 @@ typedef enum s_player_anim_state
 	PLAYER_MOVE_DOWN
 }	t_player_anim_state;
 
+//enemy animation states
 typedef enum s_enemy_anim_state
 {
 	ENEMY_MOVE_LEFT,
@@ -146,6 +159,7 @@ typedef enum s_enemy_anim_state
 	ENEMY_TELEPORT
 }	t_enemy_anim_state;
 
+//game animations
 typedef struct s_animations
 {
 	int		frame_count;
@@ -195,17 +209,27 @@ typedef struct s_animations
 	void	*bomb_2;
 	void	*bomb_3;
 	void	*bomb_4;
+
+	void	*key_1;
+	void	*key_2;
+	void	*key_3;
+
+	void	*use_key_1;
+	void	*use_key_2;
 }	t_animations;
 
-//main variables for the game
+//main variables for the game (flags, counts, pointers to other structs)
+// (p = player, e = exit, c = collectibles, en = enemy, b = bomb, k = key)
 typedef struct s_vars
 {
 	int					p_count;
 	int					e_count;
 	int					c_count;
 	int					en_count;
-	int					ext_count;
 	int					trap_count;
+	int					b_count;
+	int					k_count;
+	int					k_left_count;
 	char				**map;
 	int					map_h;
 	int					map_l;
@@ -224,6 +248,7 @@ typedef struct s_vars
 	t_animations		animations;
 	t_player_anim_state	player_animation_state;
 	t_enemy_anim_state	enemy_animation_state;
+	t_bomb				time_bomb;
 }		t_vars;
 
 //animations
@@ -235,6 +260,7 @@ void	enemy_anim_init_1(t_vars *vars);
 void	enemy_anim_init_2(t_vars *vars);
 void	trap_anim_init(t_vars *vars);
 void	bomb_anim_init(t_vars *vars);
+void	key_anim_init(t_vars *vars);
 void	player_animation_up_down(t_vars *vars);
 void	player_animation_left_right(t_vars *vars);
 void	collectible_animation(t_vars *vars);
@@ -242,10 +268,7 @@ void	enemy_animation_up_down(t_vars *vars);
 void	enemy_animation_left_right(t_vars *vars);
 void	bomb_animation(t_vars *vars);
 void	trap_animation(t_vars *vars);
-
-//icons
-void	init_icons(t_vars *vars);
-
+void	key_animation(t_vars *vars);
 
 //map validation functions
 int		check_file(int ac, char **av, t_vars *vars);
@@ -261,13 +284,17 @@ int		move_left(t_vars *vars);
 int		move_right(t_vars *vars);
 void	play_dead(t_vars *vars);
 void	place_trap(t_vars *vars, int code);
+void	defuse_bomb(t_vars *vars, int code);
 
 //event functions
+void	vars_init(t_vars *vars);
 void	print_win(char **map, t_vars *vars);
 void	print_lose(char **map, t_vars *vars);
-void	print_steps(t_vars *vars);
-void	print_trap_count(t_vars *vars);
+void	print_icons(t_vars *vars);
 void	print_bomb_timer(t_vars *vars);
+void	time_bomb_handler(t_vars *vars);
+void	activate_trap(t_vars *vars);
+void	enemy_game_loop(t_vars *vars);
 
 //rendering/mlx functions
 int		keypress(int code, t_vars *vars);
@@ -278,6 +305,9 @@ void	set_animation_sprites(t_vars *vars);
 void	init_sprites(t_vars *vars);
 void	set_sprites(t_vars *vars, int x, int y);
 void	render_sprites(t_vars *vars);
+void	init_icons(t_vars *vars);
+void	set_basic_sprites(t_vars *vars, int x, int y);
+void	set_extra_sprites(t_vars *vars, int x, int y);
 
 //enemy functions
 void	init_enemy(t_vars *vars);

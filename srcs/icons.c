@@ -6,7 +6,7 @@
 /*   By: micheng <micheng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 01:18:15 by micheng           #+#    #+#             */
-/*   Updated: 2023/08/07 02:34:57 by micheng          ###   ########.fr       */
+/*   Updated: 2023/08/07 08:20:27 by micheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,4 +23,6 @@ void	init_icons(t_vars *vars)
 			"assets/trap_img.xpm", &x, &y);
 	vars->game.bomb_img = mlx_xpm_file_to_image(vars->render.mlx,
 			"assets/bomb_img.xpm", &x, &y);
+	vars->game.key_img = mlx_xpm_file_to_image(vars->render.mlx,
+			"assets/key_img.xpm", &x, &y);
 }

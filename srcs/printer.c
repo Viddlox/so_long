@@ -6,7 +6,7 @@
 /*   By: micheng <micheng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 14:52:44 by micheng           #+#    #+#             */
-/*   Updated: 2023/08/07 02:39:55 by micheng          ###   ########.fr       */
+/*   Updated: 2023/08/07 08:41:19 by micheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,33 +34,36 @@ void	print_lose(char **map, t_vars *vars)
 	exit (0);
 }
 
-void	print_steps(t_vars *vars)
+void	print_icons(t_vars *vars)
 {
-	char	*num;
+	char	*step_count;
+	char	*trap_count;
+	char	*key_count;
 
-	num = ft_itoa(vars->game.steps);
+	step_count = ft_itoa(vars->game.steps);
+	trap_count = ft_itoa(vars->trap_count);
+	key_count = ft_itoa(vars->k_left_count);
+
 	mlx_string_put(vars->render.mlx,
-		vars->render.win, 35, 10, 0x000000, "Steps: ");
-	mlx_string_put(vars->render.mlx, vars->render.win, 100, 10, 0xFF0000, num);
-	free(num);
+		vars->render.win, 35, 5, 0x000000, "Steps: ");
+	mlx_string_put(vars->render.mlx, vars->render.win, 100, 5, 0xFF0000, step_count);
+	mlx_string_put(vars->render.mlx, vars->render.win, 35, 35, 0x000000, "x ");
+	mlx_string_put(vars->render.mlx, vars->render.win, 50, 35, 0xFF0000, trap_count);
+	mlx_string_put(vars->render.mlx, vars->render.win, 35, 60, 0x000000, "x ");
+	mlx_string_put(vars->render.mlx, vars->render.win, 50, 60, 0xFF0000, key_count);
+	free(step_count);
+	free(trap_count);
 }
 
-void	print_trap_count(t_vars *vars)
+void	print_bomb_timer(t_vars *vars)
 {
 	char	*num;
 
-	num = ft_itoa(vars->trap_count);
-	mlx_string_put(vars->render.mlx, vars->render.win, 35, 40, 0x000000, "x ");
-	mlx_string_put(vars->render.mlx, vars->render.win, 50, 40, 0xFF0000, num);
+	if (vars->time_bomb.timer <= 0)
+		num = ft_itoa(0);
+	else
+		num = ft_itoa(vars->time_bomb.timer / 10000);
+	mlx_string_put(vars->render.mlx, vars->render.win, 220, 1, 0x000000, ":");
+	mlx_string_put(vars->render.mlx, vars->render.win, 230, 1, 0xFF0000, num);
 	free(num);
 }
-
-// void	print_bomb_timer(t_vars *vars)
-// {
-// 	char	*num;
-
-// 	num = ft_itoa(vars->trap_count);
-// 	mlx_string_put(vars->render.mlx, vars->render.win, 60, 40, 0x000000, "x ");
-// 	mlx_string_put(vars->render.mlx, vars->render.win, 80, 40, 0xFF0000, num);
-// 	free(num);
-// }

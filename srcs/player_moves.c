@@ -6,7 +6,7 @@
 /*   By: micheng <micheng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 00:07:57 by micheng           #+#    #+#             */
-/*   Updated: 2023/08/06 11:54:54 by micheng          ###   ########.fr       */
+/*   Updated: 2023/08/07 08:39:22 by micheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ int	move_up(t_vars *vars)
 		print_lose(vars->map, vars);
 	if (vars->map[vars->pos.y - 1][vars->pos.x] == 'C')
 		vars->c_count--;
+	if (vars->map[vars->pos.y - 1][vars->pos.x] == 'K')
+		vars->k_left_count++;
 	if (vars->map[vars->pos.y - 1][vars->pos.x] == 'E' &&
 	vars->c_count > 0)
 		return (0);
@@ -83,6 +85,8 @@ int	move_down(t_vars *vars)
 		print_lose(vars->map, vars);
 	if (vars->map[vars->pos.y + 1][vars->pos.x] == 'C')
 		vars->c_count--;
+	if (vars->map[vars->pos.y + 1][vars->pos.x] == 'K')
+		vars->k_left_count++;
 	if (vars->map[vars->pos.y + 1][vars->pos.x] == 'E' &&
 	vars->c_count > 0)
 		return (0);
@@ -112,6 +116,8 @@ int	move_right(t_vars *vars)
 		print_lose(vars->map, vars);
 	if (vars->map[vars->pos.y][vars->pos.x + 1] == 'C')
 		vars->c_count--;
+	if (vars->map[vars->pos.y][vars->pos.x + 1] == 'K')
+		vars->k_left_count++;
 	if (vars->map[vars->pos.y][vars->pos.x + 1] == 'E' &&
 	vars->c_count > 0)
 		return (0);
@@ -141,6 +147,8 @@ int	move_left(t_vars *vars)
 		print_lose(vars->map, vars);
 	if (vars->map[vars->pos.y][vars->pos.x - 1] == 'C')
 		vars->c_count--;
+	if (vars->map[vars->pos.y][vars->pos.x - 1] == 'K')
+		vars->k_left_count++;
 	if (vars->map[vars->pos.y][vars->pos.x - 1] == 'E' &&
 	vars->c_count > 0)
 		return (0);
