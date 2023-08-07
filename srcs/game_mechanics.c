@@ -6,7 +6,7 @@
 /*   By: micheng <micheng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 02:58:50 by micheng           #+#    #+#             */
-/*   Updated: 2023/08/07 11:10:32 by micheng          ###   ########.fr       */
+/*   Updated: 2023/08/07 12:00:59 by micheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	time_bomb_handler(t_vars *vars)
 
 void	defuse_bomb(t_vars *vars)
 {
-	vars->time_bomb.timer += 50000;
+	vars->time_bomb.timer += 30000;
 	vars->k_left_count--;
 }
 
