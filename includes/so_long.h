@@ -6,7 +6,7 @@
 /*   By: micheng <micheng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 14:35:05 by micheng           #+#    #+#             */
-/*   Updated: 2023/08/07 08:37:54 by micheng          ###   ########.fr       */
+/*   Updated: 2023/08/07 09:07:26 by micheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,6 @@ typedef struct s_bomb
 {
 	int			timer;
 	int			bomb_flag;
-	int			defuse_count;
 }	t_bomb;
 
 //Tracker heuristic to optimize pathfinding
@@ -283,8 +282,8 @@ int		move_down(t_vars *vars);
 int		move_left(t_vars *vars);
 int		move_right(t_vars *vars);
 void	play_dead(t_vars *vars);
-void	place_trap(t_vars *vars, int code);
-void	defuse_bomb(t_vars *vars, int code);
+void	defuse_bomb(t_vars *vars);
+void	player_interactions(t_vars *vars, int code);
 
 //event functions
 void	vars_init(t_vars *vars);

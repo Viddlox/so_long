@@ -6,7 +6,7 @@
 /*   By: micheng <micheng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 02:58:50 by micheng           #+#    #+#             */
-/*   Updated: 2023/08/07 08:38:05 by micheng          ###   ########.fr       */
+/*   Updated: 2023/08/07 09:09:56 by micheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,26 +26,30 @@ void	vars_init(t_vars *vars)
 
 void	time_bomb_handler(t_vars *vars)
 {
-	vars->time_bomb.bomb_flag = 1;
-	if (vars->k_count == 0 && vars->time_bomb.defuse_count == 0)
-	{
-		vars->time_bomb.bomb_flag = 0;
+	if (vars->b_count == 1)
+		vars->time_bomb.bomb_flag = 1;
+	else
 		return ;
-	}
+	// if (vars->k_count == 0 && vars->time_bomb.defuse_count == 0)
+	// {
+	// 	vars->time_bomb.bomb_flag = 0;
+	// 	return ;
+	// }
 	vars->time_bomb.timer--;
-	if (vars->time_bomb.timer <= 0 && vars->k_count > 0
-		&& vars->time_bomb.defuse_count > 0)
+	if (vars->time_bomb.timer <= 0)
 	{
-		// print_lose(vars->map, vars);
+		
+		print_lose(vars->map, vars);
 		return ;
 	}
 	
 }
 
-// void	defuse_bomb(t_vars *vars, int code)
-// {
-	
-// }
+void	defuse_bomb(t_vars *vars)
+{
+	vars->time_bomb.timer += 50000;
+	vars->k_left_count--;
+}
 
 void	activate_trap(t_vars *vars)
 {

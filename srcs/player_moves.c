@@ -6,39 +6,58 @@
 /*   By: micheng <micheng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 00:07:57 by micheng           #+#    #+#             */
-/*   Updated: 2023/08/07 08:39:22 by micheng          ###   ########.fr       */
+/*   Updated: 2023/08/07 08:57:57 by micheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	place_trap(t_vars *vars, int code)
+void	player_interactions(t_vars *vars, int code)
 {
 	if (code == 126)
 	{
-		if (!is_obstacle(vars->map[vars->pos.y - 1][vars->pos.x])
+		if (vars->map[vars->pos.y - 1][vars->pos.x] == 'B' && vars->k_left_count >= 1)
+			defuse_bomb(vars);
+		else if (!is_obstacle(vars->map[vars->pos.y - 1][vars->pos.x])
 			&& vars->trap_count > 0)
+		{
 			vars->map[vars->pos.y - 1][vars->pos.x] = 'T';
+			vars->trap_count--;
+		}
 	}
 	else if (code == 123)
 	{
-		if (!is_obstacle(vars->map[vars->pos.y][vars->pos.x - 1])
+		if (vars->map[vars->pos.y][vars->pos.x - 1] == 'B' && vars->k_left_count >= 1)
+			defuse_bomb(vars);
+		else if (!is_obstacle(vars->map[vars->pos.y][vars->pos.x - 1])
 			&& vars->trap_count > 0)
+		{
 			vars->map[vars->pos.y][vars->pos.x - 1] = 'T';
+			vars->trap_count--;
+		}
 	}
 	else if (code == 125)
 	{
-		if (!is_obstacle(vars->map[vars->pos.y + 1][vars->pos.x])
+		if (vars->map[vars->pos.y + 1][vars->pos.x] == 'B' && vars->k_left_count >= 1)
+			defuse_bomb(vars);
+		else if (!is_obstacle(vars->map[vars->pos.y + 1][vars->pos.x])
 			&& vars->trap_count > 0)
+		{
 			vars->map[vars->pos.y + 1][vars->pos.x] = 'T';
+			vars->trap_count--;
+		}
 	}
 	else if (code == 124)
 	{
+		if (vars->map[vars->pos.y][vars->pos.x + 1] == 'B' && vars->k_left_count >= 1)
+			defuse_bomb(vars);
 		if (!is_obstacle(vars->map[vars->pos.y][vars->pos.x + 1])
 			&& vars->trap_count > 0)
+		{
 			vars->map[vars->pos.y][vars->pos.x + 1] = 'T';
+			vars->trap_count--;
+		}
 	}
-	vars->trap_count--;
 }
 
 int	move_up(t_vars *vars)

@@ -6,7 +6,7 @@
 /*   By: micheng <micheng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 14:50:25 by micheng           #+#    #+#             */
-/*   Updated: 2023/08/07 06:40:26 by micheng          ###   ########.fr       */
+/*   Updated: 2023/08/07 08:49:49 by micheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,7 @@ int	keypress(int code, t_vars *vars)
 		vars->map[vars->pos.y][vars->pos.x] = 'D';
 	}
 	else if (code == 126 || code == 123 || code == 124 || code == 125)
-		place_trap(vars, code);
-	// else if (code == 14)
-	// 	defuse_bomb(vars, code);
+		player_interactions(vars, code);
 	else if (code == 53)
 		dest_win(vars);
 	ft_printf ("Walked %i steps.\n", vars->game.steps);

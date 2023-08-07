@@ -6,7 +6,7 @@
 /*   By: micheng <micheng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 16:24:52 by micheng           #+#    #+#             */
-/*   Updated: 2023/08/07 05:55:23 by micheng          ###   ########.fr       */
+/*   Updated: 2023/08/07 09:08:45 by micheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,7 @@ static void	item_update(t_vars *vars, char c)
 	else if (c == 'B')
 		vars->b_count++;
 	else if (c == 'K')
-	{
 		vars->k_count++;
-		vars->time_bomb.defuse_count++;
-	}
 	else if (c == '1' || c == '0')
 		return ;
 }
