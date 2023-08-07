@@ -6,7 +6,7 @@
 /*   By: micheng <micheng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 14:50:25 by micheng           #+#    #+#             */
-/*   Updated: 2023/08/07 08:49:49 by micheng          ###   ########.fr       */
+/*   Updated: 2023/08/07 23:28:58 by micheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ int	main(int ac, char **av)
 		mlx_hook(vars.render.win, 17, 0L, dest_win, &vars);
 		mlx_loop_hook(vars.render.mlx, animation, &vars);
 		mlx_loop(vars.render.mlx);
-		// system("leaks -q so_long");
+		system("leaks -q so_long");
 	}
 	else
 		ft_printf("Error: Map is invalid or not found.\n");

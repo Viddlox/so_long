@@ -6,7 +6,7 @@
 /*   By: micheng <micheng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 05:02:10 by micheng           #+#    #+#             */
-/*   Updated: 2023/08/07 12:17:51 by micheng          ###   ########.fr       */
+/*   Updated: 2023/08/07 23:53:38 by micheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	set_animation_sprites(t_vars *vars)
 	key_anim_init(vars);
 	explosion_anim_init(vars);
 	fire_anim_init(vars);
+	portal_anim_init(vars);
 }
 
 void	init_sprites(t_vars *vars)
@@ -52,6 +53,7 @@ void	init_sprites(t_vars *vars)
 	vars->sprites.use_key_1 = vars->animations.use_key_1;
 	vars->sprites.explosion_1 = vars->animations.explosion_1;
 	vars->sprites.fire_1 = vars->animations.fire_1;
+	vars->sprites.portal_1 = vars->animations.portal_1;
 }
 
 void	render_sprites(t_vars *vars)
@@ -97,6 +99,7 @@ int	animation(t_vars *vars)
 			activate_trap(vars);
 		mlx_clear_window(vars->render.mlx, vars->render.win);
 		collectible_animation(vars);
+		portal_animation(vars);
 		bomb_animation(vars);
 		trap_animation(vars);
 		key_animation(vars);

@@ -6,7 +6,7 @@
 /*   By: micheng <micheng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 11:45:50 by micheng           #+#    #+#             */
-/*   Updated: 2023/08/07 11:04:38 by micheng          ###   ########.fr       */
+/*   Updated: 2023/08/07 23:41:47 by micheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,41 +78,4 @@ void	explosion_animation(t_vars *vars)
 		vars->sprites.explosion_1 = vars->animations.explosion_11;
 	else if (vars->sprites.explosion_1 == vars->animations.explosion_11)
 		vars->sprites.explosion_1 = vars->animations.explosion_1;
-}
-
-void	fire_animation(t_vars *vars)
-{
-	if (vars->sprites.fire_1 == vars->animations.fire_1)
-		vars->sprites.fire_1 = vars->animations.fire_2;
-	else if (vars->sprites.fire_1 == vars->animations.fire_2)
-		vars->sprites.fire_1 = vars->animations.fire_3;
-	else if (vars->sprites.fire_1 == vars->animations.fire_3)
-		vars->sprites.fire_1 = vars->animations.fire_4;
-	else if (vars->sprites.fire_1 == vars->animations.fire_4)
-		vars->sprites.fire_1 = vars->animations.fire_5;
-	else if (vars->sprites.fire_1 == vars->animations.fire_5)
-		vars->sprites.fire_1 = vars->animations.fire_6;
-	else if (vars->sprites.fire_1 == vars->animations.fire_6)
-		vars->sprites.fire_1 = vars->animations.fire_7;
-	else if (vars->sprites.fire_1 == vars->animations.fire_7)
-		vars->sprites.fire_1 = vars->animations.fire_8;
-	else if (vars->sprites.fire_1 == vars->animations.fire_8)
-		vars->sprites.fire_1 = vars->animations.fire_1;
-	else if (vars->sprites.fire_1 == vars->animations.fire_1)
-		vars->sprites.fire_1 = vars->animations.fire_2;
-	else if (vars->sprites.fire_1 == vars->animations.fire_2)
-		vars->sprites.fire_1 = vars->animations.fire_3;
-	else if (vars->sprites.fire_1 == vars->animations.fire_3)
-		vars->sprites.fire_1 = vars->animations.fire_4;
-	else if (vars->sprites.fire_1 == vars->animations.fire_4)
-		vars->sprites.fire_1 = vars->animations.fire_5;
-	else if (vars->sprites.fire_1 == vars->animations.fire_5)
-		vars->sprites.fire_1 = vars->animations.fire_6;
-	else if (vars->sprites.fire_1 == vars->animations.fire_6)
-		vars->sprites.fire_1 = vars->animations.fire_7;
-	else if (vars->sprites.fire_1 == vars->animations.fire_7)
-		vars->sprites.fire_1 = vars->animations.fire_8;
-	else if (vars->sprites.fire_1 == vars->animations.fire_8)
-		vars->sprites.fire_1 = vars->animations.fire_1;
-
 }

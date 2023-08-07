@@ -6,7 +6,7 @@
 /*   By: micheng <micheng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 14:35:05 by micheng           #+#    #+#             */
-/*   Updated: 2023/08/07 12:16:00 by micheng          ###   ########.fr       */
+/*   Updated: 2023/08/07 23:51:24 by micheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ typedef struct s_pos
 	struct s_pos	*next;
 }	t_pos;
 
-//Game trap mechanics
+//Trap mechanics
 typedef struct s_trap
 {
 	int				enemy_trapped;
@@ -72,6 +72,12 @@ typedef struct s_bomb
 	int			y;
 	int			explosion_flag;
 }	t_bomb;
+
+//Portal mechanics
+typedef struct s_portal
+{
+	int	portal_flag;
+}	t_portal;
 
 //Tracker heuristic to optimize pathfinding
 typedef struct s_tracker
@@ -142,6 +148,7 @@ typedef struct s_sprites
 	void	*use_key_1;
 	void	*explosion_1;
 	void	*fire_1;
+	void	*portal_1;
 }	t_sprites;
 
 //player animation states
@@ -240,7 +247,11 @@ typedef struct s_animations
 	void	*fire_6;
 	void	*fire_7;
 	void	*fire_8;
-	
+
+	void	*portal_1;
+	void	*portal_2;
+	void	*portal_3;
+	void	*portal_4;
 }	t_animations;
 
 //main variables for the game (flags, counts, pointers to other structs)
@@ -279,8 +290,7 @@ typedef struct s_vars
 	t_bomb				time_bomb;
 }		t_vars;
 
-//animations
-int		animation(t_vars *vars);
+//animations init
 void	collectibles_anim_init(t_vars *vars);
 void	player_anim_init_1(t_vars *vars);
 void	player_anim_init_2(t_vars *vars);
@@ -289,6 +299,12 @@ void	enemy_anim_init_2(t_vars *vars);
 void	trap_anim_init(t_vars *vars);
 void	bomb_anim_init(t_vars *vars);
 void	key_anim_init(t_vars *vars);
+void	explosion_anim_init(t_vars *vars);
+void	fire_anim_init(t_vars *vars);
+void	portal_anim_init(t_vars *vars);
+
+//animations
+int		animation(t_vars *vars);
 void	player_animation_up_down(t_vars *vars);
 void	player_animation_left_right(t_vars *vars);
 void	collectible_animation(t_vars *vars);
@@ -298,9 +314,8 @@ void	bomb_animation(t_vars *vars);
 void	trap_animation(t_vars *vars);
 void	key_animation(t_vars *vars);
 void	explosion_animation(t_vars *vars);
-void	explosion_anim_init(t_vars *vars);
-void	fire_anim_init(t_vars *vars);
 void	fire_animation(t_vars *vars);
+void	portal_animation(t_vars *vars);
 
 //map validation functions
 int		check_file(int ac, char **av, t_vars *vars);
