@@ -6,7 +6,7 @@
 /*   By: micheng <micheng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 14:35:05 by micheng           #+#    #+#             */
-/*   Updated: 2023/08/07 09:07:26 by micheng          ###   ########.fr       */
+/*   Updated: 2023/08/07 10:40:40 by micheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,9 @@ typedef struct s_bomb
 {
 	int			timer;
 	int			bomb_flag;
+	int			x;
+	int			y;
+	int			explosion_flag;
 }	t_bomb;
 
 //Tracker heuristic to optimize pathfinding
@@ -137,6 +140,8 @@ typedef struct s_sprites
 	void	*trap_1;
 	void	*key_1;
 	void	*use_key_1;
+	void	*explosion_1;
+	void	*fire_1;
 }	t_sprites;
 
 //player animation states
@@ -158,7 +163,6 @@ typedef enum s_enemy_anim_state
 	ENEMY_TELEPORT
 }	t_enemy_anim_state;
 
-//game animations
 typedef struct s_animations
 {
 	int		frame_count;
@@ -215,6 +219,28 @@ typedef struct s_animations
 
 	void	*use_key_1;
 	void	*use_key_2;
+
+	void	*explosion_1;
+	void	*explosion_2;
+	void	*explosion_3;
+	void	*explosion_4;
+	void	*explosion_5;
+	void	*explosion_6;
+	void	*explosion_7;
+	void	*explosion_8;
+	void	*explosion_9;
+	void	*explosion_10;
+	void	*explosion_11;
+
+	void	*fire_1;
+	void	*fire_2;
+	void	*fire_3;
+	void	*fire_4;
+	void	*fire_5;
+	void	*fire_6;
+	void	*fire_7;
+	void	*fire_8;
+	
 }	t_animations;
 
 //main variables for the game (flags, counts, pointers to other structs)
@@ -235,6 +261,7 @@ typedef struct s_vars
 	int					play_dead;
 	int					trap_counter;
 	int					trap_flag;
+	int					game_over_counter;
 	t_pos_data			*head_pos;
 	t_queue_data		*head_queue;
 	t_parent_data		*head_parent;
@@ -268,6 +295,10 @@ void	enemy_animation_left_right(t_vars *vars);
 void	bomb_animation(t_vars *vars);
 void	trap_animation(t_vars *vars);
 void	key_animation(t_vars *vars);
+void	explosion_animation(t_vars *vars);
+void	explosion_anim_init(t_vars *vars);
+void	fire_anim_init(t_vars *vars);
+void	fire_animation(t_vars *vars);
 
 //map validation functions
 int		check_file(int ac, char **av, t_vars *vars);
@@ -284,6 +315,7 @@ int		move_right(t_vars *vars);
 void	play_dead(t_vars *vars);
 void	defuse_bomb(t_vars *vars);
 void	player_interactions(t_vars *vars, int code);
+void	set_icons(t_vars *vars);
 
 //event functions
 void	vars_init(t_vars *vars);

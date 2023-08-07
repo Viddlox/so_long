@@ -6,7 +6,7 @@
 /*   By: micheng <micheng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 05:37:38 by micheng           #+#    #+#             */
-/*   Updated: 2023/08/07 08:42:36 by micheng          ###   ########.fr       */
+/*   Updated: 2023/08/07 11:16:04 by micheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,23 @@ void	set_basic_sprites(t_vars *vars, int x, int y)
 		mlx_put_image_to_window(vars->render.mlx,vars->render.win,
 			vars->sprites.walls, x * 32, y * 32);
 	else if (vars->map[y][x] == '0')
-		mlx_put_image_to_window(vars->render.mlx,
-			vars->render.win, vars->sprites.floors, x * 32, y * 32);
+	{
+		if (vars->time_bomb.timer <= 0)
+			mlx_put_image_to_window(vars->render.mlx,
+				vars->render.win, vars->sprites.fire_1, x * 32, y * 32);
+		else
+			mlx_put_image_to_window(vars->render.mlx,
+				vars->render.win, vars->sprites.floors, x * 32, y * 32);
+	}
 	else if (vars->map[y][x] == 'P')
-		mlx_put_image_to_window(vars->render.mlx,
+	{
+		if (vars->time_bomb.timer <= 0)
+			mlx_put_image_to_window(vars->render.mlx,
+				vars->render.win, vars->sprites.player_dead, x * 32, y * 32);
+		else
+			mlx_put_image_to_window(vars->render.mlx,
 			vars->render.win, vars->sprites.player_1, x * 32, y * 32);
+	}
 	else if (vars->map[y][x] == 'C')
 		mlx_put_image_to_window(vars->render.mlx,
 			vars->render.win, vars->sprites.collectible_1, x * 32, y * 32);
@@ -51,6 +63,13 @@ void	set_extra_sprites(t_vars *vars, int x, int y)
 	else if (vars->map[y][x] == 'K')
 		mlx_put_image_to_window(vars->render.mlx,
 			vars->render.win, vars->sprites.key_1, x * 32, y * 32);
+	else if (vars->map[y][x] == 'G')
+		mlx_put_image_to_window(vars->render.mlx,
+			vars->render.win, vars->sprites.explosion_1, x * 32, y * 32);
+}
+
+void	set_icons(t_vars *vars)
+{
 	mlx_put_image_to_window(vars->render.mlx,
 		vars->render.win, vars->game.step_img, 10, 5);
 	mlx_put_image_to_window(vars->render.mlx,

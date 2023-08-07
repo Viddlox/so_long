@@ -6,7 +6,7 @@
 /*   By: micheng <micheng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 05:02:10 by micheng           #+#    #+#             */
-/*   Updated: 2023/08/07 09:06:48 by micheng          ###   ########.fr       */
+/*   Updated: 2023/08/07 11:06:16 by micheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ void	set_animation_sprites(t_vars *vars)
 	enemy_anim_init_1(vars);
 	enemy_anim_init_2(vars);
 	key_anim_init(vars);
+	explosion_anim_init(vars);
+	fire_anim_init(vars);
 }
 
 void	init_sprites(t_vars *vars)
@@ -48,6 +50,8 @@ void	init_sprites(t_vars *vars)
 	vars->sprites.bomb_1 = vars->animations.bomb_1;
 	vars->sprites.key_1 = vars->animations.key_1;
 	vars->sprites.use_key_1 = vars->animations.use_key_1;
+	vars->sprites.explosion_1 = vars->animations.explosion_1;
+	vars->sprites.fire_1 = vars->animations.fire_1;
 }
 
 void	render_sprites(t_vars *vars)
@@ -78,6 +82,16 @@ int	animation(t_vars *vars)
 	time_bomb_handler(vars);
 	if (vars->animations.frame_count >= 2000)
 	{
+		if (vars->time_bomb.explosion_flag == 1)
+		{
+			mlx_clear_window(vars->render.mlx, vars->render.win);
+			render_sprites(vars);
+			explosion_animation(vars);
+			fire_animation(vars);
+			
+			if (vars->time_bomb.timer <= -8000)
+				print_lose(vars->map, vars);
+		}
 		if (vars->trap_flag == 1)
 			activate_trap(vars);
 		mlx_clear_window(vars->render.mlx, vars->render.win);

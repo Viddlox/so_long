@@ -6,7 +6,7 @@
 /*   By: micheng <micheng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 02:58:50 by micheng           #+#    #+#             */
-/*   Updated: 2023/08/07 09:09:56 by micheng          ###   ########.fr       */
+/*   Updated: 2023/08/07 11:10:32 by micheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,10 @@ void	vars_init(t_vars *vars)
 	vars->trap_flag = 0;
 	vars->time_bomb.timer = 160000;
 	vars->time_bomb.bomb_flag = 0;
+	vars->time_bomb.explosion_flag = 0;
 	vars->game.steps = 0;
 	vars->k_left_count = 0;
+	vars->game_over_counter = 0;
 }
 
 void	time_bomb_handler(t_vars *vars)
@@ -30,19 +32,13 @@ void	time_bomb_handler(t_vars *vars)
 		vars->time_bomb.bomb_flag = 1;
 	else
 		return ;
-	// if (vars->k_count == 0 && vars->time_bomb.defuse_count == 0)
-	// {
-	// 	vars->time_bomb.bomb_flag = 0;
-	// 	return ;
-	// }
 	vars->time_bomb.timer--;
 	if (vars->time_bomb.timer <= 0)
 	{
-		
-		print_lose(vars->map, vars);
+		vars->map[vars->time_bomb.y][vars->time_bomb.x] = 'G';
+		vars->time_bomb.explosion_flag = 1;
 		return ;
 	}
-	
 }
 
 void	defuse_bomb(t_vars *vars)
@@ -66,6 +62,12 @@ void	activate_trap(t_vars *vars)
 
 void	enemy_game_loop(t_vars *vars)
 {
+	if (vars->play_dead == 1 || vars->time_bomb.timer <= 0)
+	{
+		enemy_animation_left_right(vars);
+		enemy_animation_up_down(vars);
+		return ;
+	}
 	init_pos_list(&vars->head_pos, vars);
 	init_parent_list(&vars->head_parent, vars);
 	init_enemy(vars);

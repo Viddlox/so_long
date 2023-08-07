@@ -6,7 +6,7 @@
 /*   By: micheng <micheng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 16:24:52 by micheng           #+#    #+#             */
-/*   Updated: 2023/08/07 09:08:45 by micheng          ###   ########.fr       */
+/*   Updated: 2023/08/07 09:54:37 by micheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,9 @@ static void	item_update(t_vars *vars, char c)
 	else if (c == 'X')
 		vars->en_count++;
 	else if (c == 'B')
+	{
 		vars->b_count++;
+	}
 	else if (c == 'K')
 		vars->k_count++;
 	else if (c == '1' || c == '0')
@@ -67,7 +69,14 @@ int	check_entities(t_vars *vars)
 	{
 		x = -1;
 		while (vars->map[y][++x])
+		{
+			if (vars->map[y][x] == 'B')
+			{
+				vars->time_bomb.x = x;
+				vars->time_bomb.y = y;
+			}
 			item_update(vars, vars->map[y][x]);
+		}
 	}
 	if (!(vars->c_count > 0 || vars->e_count == 1
 		|| vars->p_count == 1 || vars->b_count <= 1))
