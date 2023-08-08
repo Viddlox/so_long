@@ -6,7 +6,7 @@
 /*   By: micheng <micheng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 00:07:57 by micheng           #+#    #+#             */
-/*   Updated: 2023/08/07 23:57:26 by micheng          ###   ########.fr       */
+/*   Updated: 2023/08/08 04:58:03 by micheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	player_interactions(t_vars *vars, int code)
 			vars->map[vars->pos.y - 1][vars->pos.x] = 'T';
 			vars->trap_count--;
 		}
+		// else if (vars->map[vars->pos.y - 1][vars->pos.x] == 'O')
 	}
 	else if (code == 123)
 	{
@@ -65,7 +66,8 @@ int	move_up(t_vars *vars)
 	vars->play_dead = 0;
 	if (vars->map[vars->pos.y - 1][vars->pos.x] == '1'
 		|| vars->map[vars->pos.y - 1][vars->pos.x] == 'B'
-		|| vars->map[vars->pos.y - 1][vars->pos.x] == 'O')
+		|| vars->map[vars->pos.y - 1][vars->pos.x] == 'O'
+		|| vars->map[vars->pos.y - 1][vars->pos.x] == 'U')
 		return (0);
 	if (vars->map[vars->pos.y - 1][vars->pos.x] == 'T')
 		vars->trap_count++;
@@ -97,7 +99,8 @@ int	move_down(t_vars *vars)
 	vars->play_dead = 0;
 	if (vars->map[vars->pos.y + 1][vars->pos.x] == '1'
 		|| vars->map[vars->pos.y + 1][vars->pos.x] == 'B'
-		|| vars->map[vars->pos.y + 1][vars->pos.x] == 'O')
+		|| vars->map[vars->pos.y + 1][vars->pos.x] == 'O'
+		|| vars->map[vars->pos.y + 1][vars->pos.x] == 'U')
 		return (0);
 	if (vars->map[vars->pos.y + 1][vars->pos.x] == 'T')
 		vars->trap_count++;
@@ -129,7 +132,8 @@ int	move_right(t_vars *vars)
 	vars->play_dead = 0;
 	if (vars->map[vars->pos.y][vars->pos.x + 1] == '1'
 		|| vars->map[vars->pos.y][vars->pos.x + 1] == 'B'
-		|| vars->map[vars->pos.y][vars->pos.x + 1] == 'O')
+		|| vars->map[vars->pos.y][vars->pos.x + 1] == 'O'
+		|| vars->map[vars->pos.y][vars->pos.x + 1] == 'U')
 		return (0);
 	if (vars->map[vars->pos.y][vars->pos.x + 1] == 'T')
 		vars->trap_count++;
@@ -161,7 +165,8 @@ int	move_left(t_vars *vars)
 	vars->play_dead = 0;
 	if (vars->map[vars->pos.y][vars->pos.x - 1] == '1'
 		|| vars->map[vars->pos.y][vars->pos.x - 1] == 'B'
-		|| vars->map[vars->pos.y][vars->pos.x - 1] == 'O')
+		|| vars->map[vars->pos.y][vars->pos.x - 1] == 'O'
+		|| vars->map[vars->pos.y][vars->pos.x - 1] == 'U')
 		return (0);
 	if (vars->map[vars->pos.y][vars->pos.x - 1] == 'T')
 		vars->trap_count++;

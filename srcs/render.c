@@ -6,7 +6,7 @@
 /*   By: micheng <micheng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 05:02:10 by micheng           #+#    #+#             */
-/*   Updated: 2023/08/07 23:53:38 by micheng          ###   ########.fr       */
+/*   Updated: 2023/08/08 21:23:14 by micheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ void	init_sprites(t_vars *vars)
 	vars->sprites.explosion_1 = vars->animations.explosion_1;
 	vars->sprites.fire_1 = vars->animations.fire_1;
 	vars->sprites.portal_1 = vars->animations.portal_1;
+	vars->sprites.purple_portal_1 = vars->animations.purple_portal_1;
 }
 
 void	render_sprites(t_vars *vars)
@@ -75,7 +76,6 @@ void	render_sprites(t_vars *vars)
 	}
 	print_icons(vars);
 	print_bomb_timer(vars);
-
 }
 
 int	animation(t_vars *vars)
@@ -99,7 +99,8 @@ int	animation(t_vars *vars)
 			activate_trap(vars);
 		mlx_clear_window(vars->render.mlx, vars->render.win);
 		collectible_animation(vars);
-		portal_animation(vars);
+		// if (vars->portal_count > 0)
+		// 	portal_animation(vars);
 		bomb_animation(vars);
 		trap_animation(vars);
 		key_animation(vars);

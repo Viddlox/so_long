@@ -6,7 +6,7 @@
 /*   By: micheng <micheng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 21:54:53 by mcheng            #+#    #+#             */
-/*   Updated: 2023/08/02 02:05:16 by micheng          ###   ########.fr       */
+/*   Updated: 2023/08/08 21:11:37 by micheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # define HEX_UP "0123456789ABCDEF"
 # define HEX_LOW "0123456789abcdef"
 # define BASE_10 "0123456789"
+# define BUFFER_SIZE 1024
 
 typedef struct s_list
 {
@@ -70,6 +71,8 @@ void	ft_lstadd_back(t_list **lst, t_list *new);
 void	ft_lstadd_front(t_list **lst, t_list *new);
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
+
+//ft_printf_utils
 int		ft_printf(const char *str, ...);
 int		ft_putchar(char c);
 int		ft_parse(va_list args, char s);
@@ -78,5 +81,11 @@ int		ft_hexdec(unsigned int num, const char s);
 int		ft_pointer(void *ptr);
 int		ft_putnbr(int n);
 int		ft_putstr(char *str);
+
+//gnl utils
+char	*get_next_line(int fd);
+int		ft_strlen_gnl(char *str);
+char	*ft_strjoin_gnl(char *save, char *buf, int r);
+int		ft_strchr_gnl(char *str, char c);
 
 #endif

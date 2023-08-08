@@ -6,11 +6,11 @@
 /*   By: micheng <micheng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 14:05:47 by shechong          #+#    #+#             */
-/*   Updated: 2023/07/03 20:01:02 by micheng          ###   ########.fr       */
+/*   Updated: 2023/08/08 21:09:22 by micheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/so_long.h"
+#include "libft.h"
 
 void	*free_and_return(void *var, void *ret)
 {

@@ -6,7 +6,7 @@
 /*   By: micheng <micheng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 14:35:05 by micheng           #+#    #+#             */
-/*   Updated: 2023/08/07 23:51:24 by micheng          ###   ########.fr       */
+/*   Updated: 2023/08/08 21:11:34 by micheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,6 @@
 # include <math.h>
 # include <stdlib.h>
 # include <stdio.h> //test
-
-# define BUFFER_SIZE 1024
 
 //Queue structure for BFS search
 typedef struct s_queue
@@ -76,8 +74,20 @@ typedef struct s_bomb
 //Portal mechanics
 typedef struct s_portal
 {
-	int	portal_flag;
+	int				portal_flag;
+	int				x;
+	int				y;
 }	t_portal;
+
+typedef enum s_portal_no
+{
+	TELEPORTER_1,
+	TELEPORTER_2,
+	TELEPORTER_3,
+	TELEPORTER_4,
+	TELEPORTER_5,
+	TELEPORTER_6
+}	t_portal_no;
 
 //Tracker heuristic to optimize pathfinding
 typedef struct s_tracker
@@ -88,6 +98,7 @@ typedef struct s_tracker
 }	t_tracker;
 
 //pointers to the head of each linked list (because modularity?)
+
 typedef struct s_trap_data
 {
 	t_trap	*head;
@@ -149,6 +160,7 @@ typedef struct s_sprites
 	void	*explosion_1;
 	void	*fire_1;
 	void	*portal_1;
+	void	*purple_portal_1;
 }	t_sprites;
 
 //player animation states
@@ -252,10 +264,17 @@ typedef struct s_animations
 	void	*portal_2;
 	void	*portal_3;
 	void	*portal_4;
+
+	void	*purple_portal_1;
+	void	*purple_portal_2;
+	void	*purple_portal_3;
+	void	*purple_portal_4;
+
 }	t_animations;
 
 //main variables for the game (flags, counts, pointers to other structs)
-// (p = player, e = exit, c = collectibles, en = enemy, b = bomb, k = key)
+// (p = player, e = exit, c = collectibles,
+// en = enemy, b = bomb, k = key, o = portal)
 typedef struct s_vars
 {
 	int					p_count;
@@ -265,10 +284,13 @@ typedef struct s_vars
 	int					trap_count;
 	int					b_count;
 	int					k_count;
+	int					portal_count;
+	int					portal_flag;
 	int					k_left_count;
 	int					invalid_count;
 	int					time_taken;
 	char				**map;
+	char				**portal_info;
 	int					map_h;
 	int					map_l;
 	int					play_dead;
@@ -323,6 +345,7 @@ int		check_map(t_vars *vars);
 int		check_path(t_vars *vars);
 void	free_map(char **map, t_vars *vars);
 char	**clone_map(t_vars *vars);
+void	find_portals(t_vars *vars);
 
 //player controls
 int		move_up(t_vars *vars);
@@ -381,11 +404,5 @@ void	ft_clear_queue_data(t_queue_data **data);
 void	ft_clear_tracked_data(t_tracker_data **data);
 void	clear_tracker_nodes(t_vars *vars);
 void	free_lists(t_vars *vars);
-
-//gnl utils
-char	*get_next_line(int fd);
-int		ft_strlen_gnl(char *str);
-char	*ft_strjoin_gnl(char *save, char *buf, int r);
-int		ft_strchr_gnl(char *str, char c);
 
 #endif

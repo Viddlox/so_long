@@ -6,11 +6,11 @@
 /*   By: micheng <micheng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 14:06:00 by shechong          #+#    #+#             */
-/*   Updated: 2023/07/03 19:59:13 by micheng          ###   ########.fr       */
+/*   Updated: 2023/08/08 21:09:17 by micheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/so_long.h"
+#include "libft.h"
 
 int	ft_strlen_gnl(char *str)
 {

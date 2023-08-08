@@ -6,7 +6,7 @@
 /*   By: micheng <micheng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 23:42:37 by micheng           #+#    #+#             */
-/*   Updated: 2023/08/07 23:44:59 by micheng          ###   ########.fr       */
+/*   Updated: 2023/08/08 04:46:55 by micheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,4 +24,12 @@ void	portal_anim_init(t_vars *vars)
 			"assets/portal_3.xpm", &x, &y);
 	vars->animations.portal_4 = mlx_xpm_file_to_image(vars->render.mlx,
 			"assets/portal_4.xpm", &x, &y);
+	vars->animations.purple_portal_1 = mlx_xpm_file_to_image(vars->render.mlx,
+			"assets/purple_portal_1.xpm", &x, &y);
+	vars->animations.purple_portal_2 = mlx_xpm_file_to_image(vars->render.mlx,
+			"assets/purple_portal_2.xpm", &x, &y);
+	vars->animations.purple_portal_3 = mlx_xpm_file_to_image(vars->render.mlx,
+			"assets/purple_portal_3.xpm", &x, &y);
+	vars->animations.purple_portal_4 = mlx_xpm_file_to_image(vars->render.mlx,
+			"assets/purple_portal_4.xpm", &x, &y);
 }

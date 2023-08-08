@@ -6,7 +6,7 @@
 /*   By: micheng <micheng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 02:58:50 by micheng           #+#    #+#             */
-/*   Updated: 2023/08/07 12:16:29 by micheng          ###   ########.fr       */
+/*   Updated: 2023/08/08 21:50:45 by micheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	vars_init(t_vars *vars)
 	vars->k_left_count = 0;
 	vars->game_over_counter = 0;
 	vars->time_taken = 0;
+	vars->portal_flag = 0;
 }
 
 void	time_bomb_handler(t_vars *vars)

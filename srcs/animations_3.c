@@ -6,7 +6,7 @@
 /*   By: micheng <micheng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 23:41:50 by micheng           #+#    #+#             */
-/*   Updated: 2023/08/07 23:58:23 by micheng          ###   ########.fr       */
+/*   Updated: 2023/08/08 04:56:19 by micheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,4 +59,13 @@ void	portal_animation(t_vars *vars)
 		vars->sprites.portal_1 = vars->animations.portal_4;
 	else if (vars->sprites.portal_1 == vars->animations.portal_4)
 		vars->sprites.portal_1 = vars->animations.portal_1;
+
+	if (vars->sprites.purple_portal_1 == vars->animations.purple_portal_1)
+		vars->sprites.purple_portal_1 = vars->animations.purple_portal_2;
+	else if (vars->sprites.purple_portal_1 == vars->animations.purple_portal_2)
+		vars->sprites.purple_portal_1 = vars->animations.purple_portal_3;
+	else if (vars->sprites.purple_portal_1 == vars->animations.purple_portal_3)
+		vars->sprites.purple_portal_1 = vars->animations.purple_portal_4;
+	else if (vars->sprites.purple_portal_1 == vars->animations.portal_4)
+		vars->sprites.purple_portal_1 = vars->animations.purple_portal_1;
 }

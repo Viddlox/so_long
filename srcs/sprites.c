@@ -6,7 +6,7 @@
 /*   By: micheng <micheng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 05:37:38 by micheng           #+#    #+#             */
-/*   Updated: 2023/08/07 23:51:54 by micheng          ###   ########.fr       */
+/*   Updated: 2023/08/08 04:50:55 by micheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,9 @@ void	set_extra_sprites(t_vars *vars, int x, int y)
 	else if (vars->map[y][x] == 'O')
 		mlx_put_image_to_window(vars->render.mlx,
 			vars->render.win, vars->sprites.portal_1, x * 32, y * 32);
+	else if (vars->map[y][x] == 'U')
+		mlx_put_image_to_window(vars->render.mlx,
+			vars->render.win, vars->sprites.purple_portal_1, x * 32, y * 32);
 }
 
 void	set_icons(t_vars *vars)

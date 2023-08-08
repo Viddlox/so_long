@@ -6,7 +6,7 @@
 /*   By: micheng <micheng@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 16:24:52 by micheng           #+#    #+#             */
-/*   Updated: 2023/08/07 23:53:00 by micheng          ###   ########.fr       */
+/*   Updated: 2023/08/08 21:24:39 by micheng          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ static void	item_update(t_vars *vars, char c)
 		vars->b_count++;
 	else if (c == 'K')
 		vars->k_count++;
+	else if (c == 'O' || c == 'U')
+		vars->portal_count++;
 	else if (c == '1' || c == '0' || c == 'O')
 		return ;
 	else
@@ -97,6 +99,7 @@ int	check_map(t_vars *vars)
 	vars->c_count = 0;
 	vars->en_count = 0;
 	vars->invalid_count = 0;
+	vars->b_count = 0;
 	if (!check_entities(vars))
 		return (0);
 	if (!check_walls(vars))
