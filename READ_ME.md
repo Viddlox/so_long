@@ -6,13 +6,15 @@ This game is completely written in C, using the mlx library which renders pixel 
 Current features include:
 
 2D sprite animations
+
 Real time enemy pathfinding up to Nth enemies
+
 Basic inventory system
+
 Simple HUD indicators (step counter, time to win tracker, etc)
+
 Fun, dynamic gameplay mechanics (pausing the chase by "playing dead", placing traps to ensnare enemies temporarily, bomb defusal, portals)
+
 Scripted win and lose scenes (such as being killed by enemies, losing when the bomb timer reaches 0)
 
-Working on:
-Boss levels
-Combat system
-Healh bar and life system
+Working on: Boss levels, Combat system, Healh bar, and life system
