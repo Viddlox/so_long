@@ -18,3 +18,5 @@ Fun, dynamic gameplay mechanics (pausing the chase by "playing dead", placing tr
 Scripted win and lose scenes (such as being killed by enemies, losing when the bomb timer reaches 0)
 
 Working on: Boss levels, Combat system, Healh bar, and life system
+
+To play the game, clone this repository then in the game directory, run the program and a valid map file (e.g. ./so_long maps/custom_maps/level_0_tutorial.ber
